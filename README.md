@@ -28,7 +28,7 @@ Layout construído mobile-first com Tailwind CSS, testado em larguras de celular
 
 ## Deploy
 
-_Pendente — projeto ainda não publicado._
+Site publicado em: https://portfolio-igorlima-pi.vercel.app
 
 ## Desenvolvimento
 
@@ -73,7 +73,7 @@ Built mobile-first with Tailwind CSS, tested at phone (390px) and desktop (1440p
 
 ### Deployment
 
-_Pending — not yet published._
+Live at: https://portfolio-igorlima-pi.vercel.app
 
 ### Development
 
