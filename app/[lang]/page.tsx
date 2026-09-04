@@ -1,0 +1,41 @@
+import { isLocale, defaultLocale, getDictionary } from "@/lib/i18n";
+import { notFound } from "next/navigation";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Hero } from "@/sections/Hero";
+import { TechStack } from "@/sections/TechStack";
+import { Projects } from "@/sections/Projects";
+import { Cases } from "@/sections/Cases";
+import { Services } from "@/sections/Services";
+import { About } from "@/sections/About";
+import { Process } from "@/sections/Process";
+import { Contact } from "@/sections/Contact";
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+
+  const locale = lang ?? defaultLocale;
+  const dict = await getDictionary(locale);
+
+  return (
+    <>
+      <Header dict={dict} locale={locale} />
+      <main className="flex-1">
+        <Hero dict={dict} />
+        <TechStack dict={dict} />
+        <Projects dict={dict} />
+        <Cases dict={dict} />
+        <Services dict={dict} />
+        <About dict={dict} />
+        <Process dict={dict} />
+        <Contact dict={dict} />
+      </main>
+      <Footer dict={dict} locale={locale} />
+    </>
+  );
+}
