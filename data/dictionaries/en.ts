@@ -16,13 +16,51 @@ export const en: Dictionary = {
   },
   hero: {
     eyebrow: "Front-End Developer",
-    title: "Professional websites and modern web applications for companies and brands.",
+    titleLines: [
+      { text: "I build websites that" },
+      { text: "make your business look" },
+      { text: "as serious as it really is.", accent: true },
+    ],
     subtitle:
-      "I build institutional websites, landing pages and web systems with React, Next.js and TypeScript — fast, responsive and ready to represent your business online.",
-    ctaPrimary: "View projects",
-    ctaSecondary: "Request a quote",
+      "Business websites, landing pages and web apps — fast, well-crafted and live in weeks, not months.",
+    ctaWhatsapp: "Start my project",
+    ctaProjects: "See projects",
     availability: "Available for new projects",
     proof: "3 real websites, already live",
+  },
+  qualify: {
+    title: "This is for you if:",
+    items: [
+      "Your current site looks like it's from 2015 — or you don't have one yet.",
+      "You've already lost a client to a competitor with a better site.",
+      "You want something professional without spending a fortune or waiting months.",
+    ],
+    proof: "Leonardo Pessanha · Click Cola Instalações · Refriar — 3 real websites, already live.",
+  },
+  benefits: {
+    title: "Benefits",
+    items: [
+      {
+        number: "01",
+        title: "Modern websites",
+        description: "Design that drives results.",
+      },
+      {
+        number: "02",
+        title: "Responsive",
+        description: "Perfect on any device.",
+      },
+      {
+        number: "03",
+        title: "High performance",
+        description: "Fast, optimized websites.",
+      },
+      {
+        number: "04",
+        title: "Ongoing support",
+        description: "From development to evolution.",
+      },
+    ],
   },
   techStack: {
     eyebrow: "Stack",
@@ -30,7 +68,7 @@ export const en: Dictionary = {
   },
   projects: {
     eyebrow: "Work",
-    title: "Featured projects",
+    title: "Projects",
     subtitle:
       "Real institutional websites, built and shipped for businesses across different industries.",
     viewProject: "Visit the site",
@@ -196,7 +234,7 @@ export const en: Dictionary = {
   },
   contact: {
     eyebrow: "Contact",
-    title: "Let's build your next project?",
+    title: "Shall we turn your idea into reality?",
     subtitle:
       "Tell me a bit about your idea or business — I'll get back to you with the next steps to bring your project to life.",
     form: {
@@ -218,6 +256,7 @@ export const en: Dictionary = {
       note: "Sending this will open your default email app with the message ready to send.",
     },
     directTitle: "Or reach out directly",
+    whatsappCta: "Chat on WhatsApp",
     email: "igorlimateixeira10@gmail.com",
     whatsapp: "+55 (27) 99653-0514",
     whatsappMessage: "Hi! I found your portfolio and I'd like to talk about a project.",

@@ -1,7 +1,12 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/layout/ContactForm";
-import { WhatsAppIcon, MailIcon, LinkedInIcon } from "@/components/icons/SocialIcons";
+import {
+  WhatsAppIcon,
+  MailIcon,
+  LinkedInIcon,
+  ArrowUpRightIcon,
+} from "@/components/icons/SocialIcons";
 import { CONTACT_EMAIL, WHATSAPP_NUMBER } from "@/lib/contact";
 
 export function Contact({ dict }: { dict: Dictionary }) {
@@ -37,24 +42,25 @@ export function Contact({ dict }: { dict: Dictionary }) {
                   href={whatsappHref}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl bg-accent px-6 py-5 text-white shadow-[0_10px_30px_-14px_rgba(47,92,246,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-accent-ink"
+                  className="group flex items-center gap-4 rounded-2xl bg-accent px-6 py-5 text-bg shadow-[0_10px_30px_-14px_rgba(72,230,50,0.5)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-accent-hover"
                 >
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-white/15">
+                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-bg/15">
                     <WhatsAppIcon className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-xs uppercase tracking-wide text-white">
-                      WhatsApp
+                    <span className="block text-base font-medium">
+                      {dict.contact.whatsappCta}
                     </span>
-                    <span className="block font-mono text-base font-medium">
+                    <span className="block font-mono text-xs uppercase tracking-wide text-bg/70">
                       {dict.contact.whatsapp}
                     </span>
                   </span>
+                  <ArrowUpRightIcon className="ml-auto h-4 w-4 flex-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="group flex items-center gap-4 rounded-2xl border border-line bg-surface px-6 py-5 transition-colors duration-200 hover:border-ink"
+                  className="glow-card group flex items-center gap-4 rounded-2xl border border-line bg-surface/60 px-6 py-5 backdrop-blur-sm"
                 >
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-bg text-ink-soft">
                     <MailIcon className="h-5 w-5" />
@@ -83,7 +89,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
           </div>
 
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8">
+            <div className="rounded-2xl border border-line bg-surface/60 p-6 backdrop-blur-sm sm:p-8">
               <ContactForm dict={dict.contact.form} />
             </div>
           </Reveal>

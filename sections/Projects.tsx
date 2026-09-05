@@ -35,7 +35,6 @@ export function Projects({ dict }: { dict: Dictionary }) {
                     src={project.image}
                     alt={copy.name}
                     sizes="(min-width: 768px) 52vw, 92vw"
-                    className="transition-transform duration-500 hover:-translate-y-1.5"
                   />
 
                   <div>

@@ -1,13 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Dictionary } from "@/data/dictionaries/pt";
 import type { Locale } from "@/lib/i18n";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
+import { ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
 export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const [open, setOpen] = useState(false);
+  // Transparente sobre o Hero; ganha fundo e borda assim que a página
+  // rola — sem isso o header (fixed) fica ilegível por cima do conteúdo
+  // das outras seções.
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const links = [
     { href: "#home", label: dict.nav.home },
@@ -18,31 +32,38 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link href={`/${locale}#home`} className="font-mono text-sm font-semibold tracking-widest">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        scrolled || open
+          ? "border-line bg-bg/85 backdrop-blur-xl"
+          : "border-transparent bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8 lg:h-24">
+        <Link href={`/${locale}#home`} className="font-mono text-sm font-semibold tracking-[0.08em] text-ink">
           IGOR<span className="text-accent">.</span>LIMA
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="link-underline text-sm text-ink-soft transition-colors hover:text-ink"
+              className="link-underline text-[11px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <LanguageSwitch current={locale} />
           <a
             href="#contact"
-            className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-[0_1px_2px_rgba(11,13,18,0.06)] transition-all hover:bg-accent-ink hover:shadow-[0_4px_16px_-4px_rgba(47,92,246,0.5)]"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-bg shadow-[0_0_24px_-8px_rgba(72,230,50,0.75)] transition-all hover:bg-accent-hover hover:shadow-[0_0_30px_-6px_rgba(72,230,50,0.8)]"
           >
             {dict.nav.cta}
+            <ArrowUpRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
 
@@ -52,7 +73,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
             className={`h-px w-5 bg-ink transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
@@ -64,7 +85,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-line bg-bg px-5 pb-6 md:hidden">
+        <div id="mobile-menu" className="border-t border-line bg-bg/95 px-5 pb-6 backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col gap-1 pt-4">
             {links.map((link) => (
               <a

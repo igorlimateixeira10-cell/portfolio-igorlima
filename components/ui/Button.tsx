@@ -8,7 +8,7 @@ const variants = {
   primary: "bg-ink text-bg hover:bg-accent-ink",
   secondary: "border border-line text-ink hover:border-ink hover:bg-surface bg-transparent",
   accent:
-    "bg-accent text-white shadow-[0_10px_24px_-12px_rgba(47,92,246,0.6)] hover:bg-accent-ink hover:-translate-y-0.5",
+    "bg-accent text-bg shadow-[0_10px_24px_-12px_rgba(72,230,50,0.55)] hover:bg-accent-hover hover:-translate-y-0.5",
 };
 
 type Variant = keyof typeof variants;
