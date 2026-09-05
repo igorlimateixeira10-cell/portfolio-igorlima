@@ -2,6 +2,7 @@ import type { Dictionary } from "@/data/dictionaries/pt";
 import { projects } from "@/data/projects";
 import { Button } from "@/components/ui/Button";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { HeroScene } from "@/components/three/HeroScene";
 import { ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 import {
   ReactIcon,
@@ -15,6 +16,8 @@ export function Hero({ dict }: { dict: Dictionary }) {
 
   return (
     <section id="home" className="relative overflow-hidden border-b border-line">
+      {/* Camada 1: grade estática (CSS puro) — sempre visível, serve de
+          base e de alternativa caso o WebGL não carregue. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]"
@@ -25,6 +28,18 @@ export function Hero({ dict }: { dict: Dictionary }) {
           maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
         }}
       />
+
+      {/* Camada 2: cena 3D discreta (Three.js), carregada só no cliente e só
+          em telas grandes — no mobile o espaço é todo ocupado pelo texto, e
+          a forma acabava sobrepondo o título. */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 hidden lg:block"
+        style={{
+          maskImage: "radial-gradient(ellipse 75% 65% at 62% 35%, black 35%, transparent 85%)",
+        }}
+      >
+        <HeroScene />
+      </div>
 
       <div className="mx-auto grid max-w-6xl gap-16 px-5 pb-24 pt-20 sm:px-8 sm:pb-32 sm:pt-28 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-10">
         <div>
