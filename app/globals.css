@@ -1,14 +1,32 @@
 @import "tailwindcss";
 
+/*
+ * Tema escuro premium/tecnológico (v5) — verde. Os valores abaixo foram
+ * checados (fórmula de luminância relativa do WCAG) para manter
+ * contraste AA em todo o site sobre o fundo quase-preto:
+ *  - --ink-faint sobre --surface (pior caso, o mais claro dos dois):  4,5:1
+ *  - --ink-faint sobre --bg:                                          4,8:1
+ *  - --accent-ink (texto) sobre --bg:                                14,4:1
+ *  - texto escuro (--bg) sobre --accent:                             12,0:1
+ *  - texto escuro (--bg) sobre --accent-hover:                       13,5:1
+ * Convenção única pros botões com fundo --accent: texto sempre em --bg
+ * (nunca branco) — inclusive no hover, que troca pra --accent-hover.
+ * --accent-hover é mais CLARO que --accent (não mais escuro): é o que
+ * mantém esse texto escuro legível nas duas variantes.
+ */
 :root {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --ink: #0b0d12;
-  --ink-soft: #4b5163;
-  --ink-faint: #626884; /* contraste 5,2:1 sobre --surface — corrige falha de acessibilidade da v1 */
-  --line: #e4e6ed;
-  --accent: #2f5cf6;
-  --accent-ink: #1c3fc9;
+  --bg: #080a08;
+  --surface: #111510;
+  --ink: #f4f7f1;
+  --ink-soft: #afb6ac;
+  --ink-faint: #778073;
+  --line: rgba(255, 255, 255, 0.09);
+  --accent: #48e632;
+  --accent-ink: #88f477;
+  --accent-hover: #6bf057;
+  --accent-2: #b3ff9f;
+  /* Ponta esverdeada-azulada do degradê do título (ver .text-gradient-accent). */
+  --accent-violet: #2dd4a8;
 }
 
 @theme inline {
@@ -20,12 +38,16 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-2: var(--accent-2);
+  --color-accent-violet: var(--accent-violet);
   --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-jetbrains-mono);
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -44,9 +66,17 @@ body {
   color: var(--ink);
 }
 
+/* O header agora é fixed (ver Header.tsx) — sem isso, rolar até uma
+   âncora (#projects, #contact...) deixa o topo da seção escondido
+   atrás dele. 6rem cobre a altura do header (5rem no mobile, 6rem no
+   desktop) com uma folga pequena. */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
 }
 
 :focus-visible {
@@ -70,15 +100,34 @@ body {
   }
 }
 
+/*
+ * Estado inicial (antes de entrar na viewport) — ver components/ui/Reveal.tsx.
+ * O componente decide, via IntersectionObserver, quando trocar para
+ * `.reveal--visible` (dispara a animação uma única vez e permanece visível
+ * depois, mesmo se o usuário rolar para cima de novo). Sem JS (ou antes da
+ * hidratação), `.reveal` sozinho já é visível — nunca fica em branco.
+ */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.reveal--pending {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.reveal--visible {
   animation: reveal-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    animation: none;
+  .reveal.reveal--pending {
     opacity: 1;
     transform: none;
+  }
+  .reveal.reveal--visible {
+    animation: none;
   }
 }
 
@@ -108,5 +157,142 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .link-underline::after {
     transition: none;
+  }
+}
+
+/* Texto com degradê verde → esverdeado-azulado — usado no trecho de
+   destaque do título do Hero. */
+.text-gradient-accent {
+  background: linear-gradient(95deg, var(--accent-ink), var(--accent-violet));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Cartão "vidro escuro" com glow no hover — usado nos cards de Projetos,
+   Serviços e nos benefícios. Sutil: sobe alguns px, acende a borda e um
+   glow verde (mesma cor do accent do site) bem suave por trás. */
+.glow-card {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.glow-card:hover,
+.glow-card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(72, 230, 50, 0.4);
+  box-shadow:
+    0 30px 60px -24px rgba(0, 0, 0, 0.7),
+    0 0 42px -12px rgba(72, 230, 50, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-card {
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .glow-card:hover,
+  .glow-card:focus-within {
+    transform: none;
+  }
+}
+
+/* Hero: conteúdo entra em uma cadência breve e curta ao carregar a página. */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-enter {
+  animation: hero-enter 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter { animation: none; }
+}
+
+/*
+ * Cenário fixo do Hero (ver components/hero/HeroBackdrop.tsx) — duas peças:
+ *
+ * 1) .hero-blob: as "ilhas" grandes e desfocadas (azul/roxo/verde) que
+ *    nunca param — só CSS, sem depender de JS/mouse. Posição e tamanho
+ *    vêm inline (left/top/width/height por instância); a classe cuida só
+ *    da aparência (blur, formato) e da animação contínua (transform).
+ * 2) .hero-energy-line: o traço de cada linha de energia "flui" ao longo
+ *    da curva via stroke-dashoffset, sem depender de JS.
+ * As partículas pequenas (Camada 4) são Canvas2D — não precisam de CSS.
+ */
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  /* blur() grande é caro pro compositor — mais leve em telas estreitas
+     (celular), onde além de menos necessário visualmente, ajuda a
+     reduzir o trabalho da GPU bem no momento em que o usuário começa a
+     rolar a página (é quando o SiteWallpaper fixed + os canvases da
+     estátua/partículas mais precisam recompor). */
+  filter: blur(60px);
+  will-change: transform;
+  animation-name: hero-blob-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@media (min-width: 640px) {
+  .hero-blob {
+    filter: blur(110px);
+  }
+}
+
+@keyframes hero-blob-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(5%, -6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-6%, 5%, 0) scale(0.94);
+  }
+}
+
+.hero-energy-line {
+  stroke-linecap: round;
+  animation-name: hero-energy-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes hero-energy-flow {
+  to {
+    stroke-dashoffset: -640;
+  }
+}
+
+/* Molho de linhas de onda — 5 curvas coladas (mesmo período, deslocadas
+   só alguns px na vertical) que sobem e descem juntas devagar, além do
+   fluxo do stroke-dashoffset de cada uma. É a combinação das duas
+   animações — balanço + fluxo — que dá a sensação de onda "andando"
+   pela tela, não só uma linha estática que pisca. */
+.hero-wave-group {
+  animation-name: hero-wave-bob;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes hero-wave-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
   }
 }

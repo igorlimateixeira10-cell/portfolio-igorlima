@@ -23,31 +23,31 @@ export default async function OpengraphImage({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "#f7f8fa",
+          background: "#080a08",
           fontFamily: "monospace",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#2f5cf6" }} />
-          <span style={{ fontSize: 26, color: "#4b5163", letterSpacing: 2 }}>IGOR.LIMA</span>
+          <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#48e632" }} />
+          <span style={{ fontSize: 26, color: "#afb6ac", letterSpacing: 2 }}>IGOR.LIMA</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <span style={{ fontSize: 30, color: "#1c3fc9", letterSpacing: 3 }}>
+          <span style={{ fontSize: 30, color: "#88f477", letterSpacing: 3 }}>
             {dict.hero.eyebrow.toUpperCase()}
           </span>
           <span
             style={{
               fontSize: 64,
               fontWeight: 700,
-              color: "#0b0d12",
+              color: "#f4f7f1",
               lineHeight: 1.15,
               maxWidth: 980,
             }}
           >
             {dict.meta.title.split("|")[0].trim()}
           </span>
-          <span style={{ fontSize: 28, color: "#4b5163", maxWidth: 820 }}>
+          <span style={{ fontSize: 28, color: "#afb6ac", maxWidth: 820 }}>
             React · Next.js · TypeScript
           </span>
         </div>

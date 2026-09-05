@@ -1,8 +1,11 @@
 import { isLocale, defaultLocale, getDictionary } from "@/lib/i18n";
 import { notFound } from "next/navigation";
+import { SiteWallpaper } from "@/components/wallpaper/SiteWallpaper";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/sections/Hero";
+import { Qualify } from "@/sections/Qualify";
+import { Benefits } from "@/sections/Benefits";
 import { TechStack } from "@/sections/TechStack";
 import { Projects } from "@/sections/Projects";
 import { WhyMe } from "@/sections/WhyMe";
@@ -24,15 +27,18 @@ export default async function HomePage({
 
   return (
     <>
+      <SiteWallpaper />
       <Header dict={dict} locale={locale} />
       <main className="flex-1">
         <Hero dict={dict} />
-        <TechStack dict={dict} />
+        <Qualify dict={dict} />
+        <Benefits dict={dict} />
         <Projects dict={dict} />
         <WhyMe dict={dict} />
         <Services dict={dict} />
         <About dict={dict} />
         <Process dict={dict} />
+        <TechStack dict={dict} />
         <Contact dict={dict} />
       </main>
       <Footer dict={dict} locale={locale} />

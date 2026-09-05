@@ -15,12 +15,26 @@ export type Dictionary = {
   };
   hero: {
     eyebrow: string;
-    title: string;
+    /** Título em linhas — cada linha pode ser marcada com `accent` para
+     *  ganhar o destaque em degradê (ver sections/Hero.tsx). */
+    titleLines: { text: string; accent?: boolean }[];
     subtitle: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
+    ctaWhatsapp: string;
+    ctaProjects: string;
     availability: string;
     proof: string;
+  };
+  /** Faixa logo abaixo do Hero que qualifica o visitante ("isso é pra
+   *  você se..."), com exatamente 3 itens (ver sections/Qualify.tsx). */
+  qualify: {
+    title: string;
+    items: string[];
+    proof: string;
+  };
+  benefits: {
+    /** Só para leitores de tela — a faixa em si não tem título visível. */
+    title: string;
+    items: { number: string; title: string; description: string }[];
   };
   techStack: {
     eyebrow: string;
@@ -94,6 +108,7 @@ export type Dictionary = {
       note: string;
     };
     directTitle: string;
+    whatsappCta: string;
     email: string;
     whatsapp: string;
     whatsappMessage: string;
@@ -120,14 +135,52 @@ export const pt: Dictionary = {
     cta: "Solicitar orçamento",
   },
   hero: {
-    eyebrow: "Front-End Developer",
-    title: "Websites profissionais e aplicações web modernas para empresas e marcas.",
+    eyebrow: "Desenvolvedor Front-End",
+    titleLines: [
+      { text: "Eu construo sites que" },
+      { text: "fazem seu negócio parecer" },
+      { text: "tão sério quanto ele é.", accent: true },
+    ],
     subtitle:
-      "Desenvolvo sites institucionais, landing pages e sistemas web com React, Next.js e TypeScript — rápidos, responsivos e prontos para representar o seu negócio online.",
-    ctaPrimary: "Ver projetos",
-    ctaSecondary: "Solicitar orçamento",
+      "Sites institucionais, landing pages e aplicações web — rápidos, bem-feitos e no ar em poucas semanas.",
+    ctaWhatsapp: "Começar meu projeto",
+    ctaProjects: "Ver projetos",
     availability: "Disponível para novos projetos",
     proof: "3 sites reais, publicados e no ar",
+  },
+  qualify: {
+    title: "Isso é pra você se:",
+    items: [
+      "Seu site atual parece de 2015 — ou você ainda nem tem um.",
+      "Você já perdeu cliente pra um concorrente com site melhor.",
+      "Você quer algo profissional, sem gastar uma fortuna nem esperar meses.",
+    ],
+    proof: "Leonardo Pessanha · Click Cola Instalações · Refriar — 3 sites reais, publicados e no ar.",
+  },
+  benefits: {
+    title: "Benefícios",
+    items: [
+      {
+        number: "01",
+        title: "Sites modernos",
+        description: "Design que gera resultados.",
+      },
+      {
+        number: "02",
+        title: "Responsivos",
+        description: "Perfeitos em qualquer dispositivo.",
+      },
+      {
+        number: "03",
+        title: "Alta performance",
+        description: "Sites rápidos e otimizados.",
+      },
+      {
+        number: "04",
+        title: "Suporte contínuo",
+        description: "Do desenvolvimento à evolução.",
+      },
+    ],
   },
   techStack: {
     eyebrow: "Stack",
@@ -135,7 +188,7 @@ export const pt: Dictionary = {
   },
   projects: {
     eyebrow: "Trabalho",
-    title: "Projetos em destaque",
+    title: "Projetos",
     subtitle:
       "Sites institucionais reais, desenvolvidos e publicados para negócios de diferentes segmentos.",
     viewProject: "Visitar o site",
@@ -304,7 +357,7 @@ export const pt: Dictionary = {
   },
   contact: {
     eyebrow: "Contato",
-    title: "Vamos criar seu próximo projeto?",
+    title: "Vamos transformar sua ideia em realidade?",
     subtitle:
       "Me conte um pouco sobre a sua ideia ou negócio — eu retorno com os próximos passos para colocar seu projeto no ar.",
     form: {
@@ -326,6 +379,7 @@ export const pt: Dictionary = {
       note: "Ao enviar, seu e-mail padrão será aberto com a mensagem pronta para envio.",
     },
     directTitle: "Ou fale diretamente",
+    whatsappCta: "Conversar no WhatsApp",
     email: "igorlimateixeira10@gmail.com",
     whatsapp: "+55 (27) 99653-0514",
     whatsappMessage: "Olá! Vim pelo portfólio e gostaria de conversar sobre um projeto.",

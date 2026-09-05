@@ -8,7 +8,12 @@ import { GitHubIcon, ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
 export function Projects({ dict }: { dict: Dictionary }) {
   return (
-    <section id="projects" className="border-b border-line">
+    // bg-bg/92: mais opaco que o resto das sections — os cases de projeto
+    // são texto denso e importante (prova social de verdade), e a coluna
+    // de texto de cada case cai bem em cima de onde a estátua do
+    // SiteWallpaper mora. Ainda deixa uma névoa do cenário aparecer, só
+    // que sem competir com a leitura.
+    <section id="projects" className="border-b border-line bg-bg/92">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading
@@ -35,7 +40,6 @@ export function Projects({ dict }: { dict: Dictionary }) {
                     src={project.image}
                     alt={copy.name}
                     sizes="(min-width: 768px) 52vw, 92vw"
-                    className="transition-transform duration-500 hover:-translate-y-1.5"
                   />
 
                   <div>

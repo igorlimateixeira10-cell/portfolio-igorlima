@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Process({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line">
+    <section className="border-b border-line bg-bg/80">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading eyebrow={dict.process.eyebrow} title={dict.process.title} />

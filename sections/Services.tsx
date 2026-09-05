@@ -15,7 +15,7 @@ const icons = [GlobeIcon, TargetIcon, BuildingIcon, CartIcon, TerminalIcon, Wren
 
 export function Services({ dict }: { dict: Dictionary }) {
   return (
-    <section id="services" className="border-b border-line">
+    <section id="services" className="border-b border-line bg-bg/80">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading
@@ -25,12 +25,12 @@ export function Services({ dict }: { dict: Dictionary }) {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {dict.services.items.map((service, i) => {
             const Icon = icons[i];
             return (
-              <Reveal key={service.title} delay={i * 50}>
-                <div className="group flex h-full flex-col gap-3 bg-surface p-7 transition-colors duration-200 hover:bg-bg">
+              <Reveal key={service.title} delay={i * 50} className="h-full">
+                <div className="glow-card group flex h-full flex-col gap-3 rounded-2xl border border-line bg-surface/60 p-7 backdrop-blur-sm">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent-ink transition-transform duration-200 group-hover:scale-105">
                     <Icon className="h-5 w-5" />
                   </span>
