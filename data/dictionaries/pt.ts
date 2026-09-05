@@ -20,6 +20,7 @@ export type Dictionary = {
     ctaPrimary: string;
     ctaSecondary: string;
     availability: string;
+    proof: string;
   };
   techStack: {
     eyebrow: string;
@@ -32,14 +33,7 @@ export type Dictionary = {
     viewProject: string;
     viewCode: string;
     otherProjects: string;
-    items: Record<
-      ProjectSlug,
-      { name: string; category: string; description: string }
-    >;
-  };
-  cases: {
-    eyebrow: string;
-    title: string;
+    caseLabel: string;
     labels: {
       objective: string;
       tech: string;
@@ -48,19 +42,36 @@ export type Dictionary = {
     };
     items: Record<
       ProjectSlug,
-      { objective: string; solution: string; result: string }
+      {
+        name: string;
+        category: string;
+        description: string;
+        objective: string;
+        solution: string;
+        result: string;
+      }
     >;
+  };
+  whyMe: {
+    eyebrow: string;
+    title: string;
+    items: { title: string; description: string }[];
   };
   services: {
     eyebrow: string;
     title: string;
     subtitle: string;
     items: { title: string; description: string }[];
+    ctaText: string;
+    ctaLink: string;
   };
   about: {
     eyebrow: string;
     title: string;
+    lead: string;
     paragraphs: string[];
+    principlesLabel: string;
+    principles: string[];
   };
   process: {
     eyebrow: string;
@@ -85,8 +96,8 @@ export type Dictionary = {
     directTitle: string;
     email: string;
     whatsapp: string;
+    whatsappMessage: string;
     linkedin: string;
-    placeholder: string;
   };
   footer: {
     tagline: string;
@@ -96,7 +107,7 @@ export type Dictionary = {
 
 export const pt: Dictionary = {
   meta: {
-    title: "Igor Lima | Front-End Developer",
+    title: "Igor Lima Teixeira | Front-End Developer",
     description:
       "Front-End Developer especializado em React, Next.js e TypeScript. Desenvolvo websites profissionais, landing pages e aplicações web para empresas no Brasil e no exterior.",
   },
@@ -116,6 +127,7 @@ export const pt: Dictionary = {
     ctaPrimary: "Ver projetos",
     ctaSecondary: "Solicitar orçamento",
     availability: "Disponível para novos projetos",
+    proof: "3 sites reais, publicados e no ar",
   },
   techStack: {
     eyebrow: "Stack",
@@ -126,41 +138,22 @@ export const pt: Dictionary = {
     title: "Projetos em destaque",
     subtitle:
       "Sites institucionais reais, desenvolvidos e publicados para negócios de diferentes segmentos.",
-    viewProject: "Ver projeto",
-    viewCode: "Ver código",
+    viewProject: "Visitar o site",
+    viewCode: "Ver código no GitHub",
     otherProjects: "Outros projetos técnicos no GitHub",
+    caseLabel: "Case",
+    labels: {
+      objective: "Objetivo",
+      tech: "Tecnologias",
+      solution: "Solução desenvolvida",
+      result: "Resultado",
+    },
     items: {
       "site-leo": {
         name: "Leonardo Pessanha — Psicólogo",
         category: "Site institucional",
         description:
           "Site institucional para um psicólogo clínico em Serra/ES, com blog, agendamento via WhatsApp e SEO técnico completo.",
-      },
-      clickcola: {
-        name: "Click Cola Instalações",
-        category: "Site institucional",
-        description:
-          "Site institucional para uma empresa de instalação de pisos em Colatina/ES, com galeria de obras e assistente de agendamento via WhatsApp.",
-      },
-      refriar: {
-        name: "Refriar",
-        category: "Site institucional",
-        description:
-          "Site institucional para uma empresa de climatização e assistência técnica, com formulário de orçamento integrado ao WhatsApp.",
-      },
-    },
-  },
-  cases: {
-    eyebrow: "Cases",
-    title: "Como cada projeto foi resolvido",
-    labels: {
-      objective: "Objetivo",
-      tech: "Tecnologias",
-      solution: "Solução",
-      result: "Resultado",
-    },
-    items: {
-      "site-leo": {
         objective:
           "Dar presença profissional online a um psicólogo clínico, facilitando o agendamento de sessões sem depender apenas de redes sociais.",
         solution:
@@ -169,6 +162,10 @@ export const pt: Dictionary = {
           "Site publicado e no ar, com SEO técnico configurado (metadados, sitemap e Open Graph) para indexação em buscadores.",
       },
       clickcola: {
+        name: "Click Cola Instalações",
+        category: "Site institucional",
+        description:
+          "Site institucional para uma empresa de instalação de pisos em Colatina/ES, com galeria de obras e assistente de agendamento via WhatsApp.",
         objective:
           "Apresentar o portfólio de obras de uma empresa de instalação de pisos e transformar visitas em pedidos de orçamento.",
         solution:
@@ -177,6 +174,10 @@ export const pt: Dictionary = {
           "Site publicado e no ar, com um canal de contato direto funcionando via WhatsApp.",
       },
       refriar: {
+        name: "Refriar",
+        category: "Site institucional",
+        description:
+          "Site institucional para uma empresa de climatização e assistência técnica, com formulário de orçamento integrado ao WhatsApp.",
         objective:
           "Criar uma página institucional simples para uma empresa de climatização e assistência técnica, com um jeito fácil de pedir orçamento.",
         solution:
@@ -184,6 +185,32 @@ export const pt: Dictionary = {
         result: "Site publicado e no ar, pronto para gerar contatos comerciais.",
       },
     },
+  },
+  whyMe: {
+    eyebrow: "Por que trabalhar comigo",
+    title: "O que você recebe em cada projeto",
+    items: [
+      {
+        title: "Contato direto, sem intermediários",
+        description:
+          "Você fala comigo diretamente do início ao fim do projeto — sem gerente de conta, sem repasse de informação.",
+      },
+      {
+        title: "SEO técnico desde o primeiro commit",
+        description:
+          "Metadados, Open Graph, sitemap e estrutura semântica fazem parte do site desde o início, não são um adicional de última hora.",
+      },
+      {
+        title: "Stack moderna e sustentável",
+        description:
+          "React, Next.js e TypeScript: tecnologias amplamente usadas no mercado, fáceis de manter e evoluir no futuro, com qualquer desenvolvedor.",
+      },
+      {
+        title: "Site testado antes da entrega",
+        description:
+          "Cada projeto é conferido em celular, tablet e desktop antes de ir ao ar — não só no meu monitor.",
+      },
+    ],
   },
   services: {
     eyebrow: "Serviços",
@@ -221,14 +248,22 @@ export const pt: Dictionary = {
           "Ajustes, correções e evolução de sites já existentes: performance, responsividade, SEO ou novas funcionalidades.",
       },
     ],
+    ctaText: "Não sabe qual serviço encaixa no seu projeto? Fale comigo",
+    ctaLink: "#contact",
   },
   about: {
     eyebrow: "Sobre mim",
-    title: "Igor Lima — Front-End Developer",
+    title: "Igor Lima Teixeira — Front-End Developer",
+    lead: "Sou Front-End Developer focado em construir interfaces web modernas, responsivas e com boa performance.",
     paragraphs: [
-      "Sou Front-End Developer focado em construir interfaces web modernas, responsivas e com boa performance.",
       "Trabalho principalmente com React, Next.js e TypeScript, unindo qualidade visual, código organizado e atenção à experiência do usuário em cada projeto.",
       "Já desenvolvi sites institucionais para negócios reais, sempre buscando equilíbrio entre design, velocidade de carregamento e facilidade de manutenção.",
+    ],
+    principlesLabel: "Como eu trabalho",
+    principles: [
+      "Comunicação direta pelo WhatsApp, do orçamento à entrega.",
+      "Site publicado e testado em diferentes telas antes da entrega final.",
+      "Código organizado, pensado para ser mantido e ampliado depois.",
     ],
   },
   process: {
@@ -291,10 +326,10 @@ export const pt: Dictionary = {
       note: "Ao enviar, seu e-mail padrão será aberto com a mensagem pronta para envio.",
     },
     directTitle: "Ou fale diretamente",
-    email: "seuemail@exemplo.com",
-    whatsapp: "+55 (00) 00000-0000",
+    email: "igorlimateixeira10@gmail.com",
+    whatsapp: "+55 (27) 99653-0514",
+    whatsappMessage: "Olá! Vim pelo portfólio e gostaria de conversar sobre um projeto.",
     linkedin: "linkedin.com/in/igor-teixeira-4055232b8",
-    placeholder: "em breve",
   },
   footer: {
     tagline: "Front-End Developer",

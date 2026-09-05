@@ -5,7 +5,7 @@
   --surface: #ffffff;
   --ink: #0b0d12;
   --ink-soft: #4b5163;
-  --ink-faint: #8a90a3;
+  --ink-faint: #626884; /* contraste 5,2:1 sobre --surface — corrige falha de acessibilidade da v1 */
   --line: #e4e6ed;
   --accent: #2f5cf6;
   --accent-ink: #1c3fc9;
@@ -79,5 +79,34 @@ body {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Sublinhado que cresce a partir do centro no hover — usado nos links do menu. */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-underline::after {
+    transition: none;
   }
 }

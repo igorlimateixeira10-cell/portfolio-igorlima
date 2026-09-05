@@ -7,14 +7,16 @@ export function Reveal({
   children,
   delay = 0,
   className = "",
+  as: Tag = "div",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  as?: "div" | "li";
 }) {
   return (
-    <div className={`reveal ${className}`} style={{ animationDelay: `${delay}ms` }}>
+    <Tag className={`reveal ${className}`} style={{ animationDelay: `${delay}ms` }}>
       {children}
-    </div>
+    </Tag>
   );
 }

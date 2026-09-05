@@ -37,8 +37,8 @@ export function TechStack({ dict }: { dict: Dictionary }) {
               delay={i * 40}
               className={i === stack.length - 1 ? "col-span-2 sm:col-span-1" : ""}
             >
-              <div className="flex h-28 flex-col items-center justify-center gap-2.5 bg-surface px-2 text-center">
-                <Icon className="h-6 w-6 text-ink-soft" />
+              <div className="group flex h-28 flex-col items-center justify-center gap-2.5 bg-surface px-2 text-center transition-colors hover:bg-bg">
+                <Icon className="h-6 w-6 text-ink-soft transition-colors duration-200 group-hover:text-accent-ink" />
                 <span className="font-mono text-[11px] text-ink-soft">{name}</span>
               </div>
             </Reveal>

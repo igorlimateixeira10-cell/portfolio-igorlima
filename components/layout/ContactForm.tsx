@@ -3,13 +3,13 @@
 import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { ButtonAsButton } from "@/components/ui/Button";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 // Não há backend configurado para este site. O envio abre o app de e-mail do
 // visitante (mailto:) com a mensagem pronta — funciona de verdade, sem
 // depender de nenhum serviço externo. Quando houver um backend (ex.: uma
 // API route ou um serviço como Formspree/Resend), troque handleSubmit por
-// uma chamada real e remova o comentário acima.
-const TARGET_EMAIL = "seuemail@exemplo.com"; // TODO: substituir pelo e-mail comercial real
+// uma chamada real.
 
 export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
   const [sent, setSent] = useState(false);
@@ -35,7 +35,7 @@ export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
       .filter(Boolean)
       .join("\n");
 
-    window.location.href = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 

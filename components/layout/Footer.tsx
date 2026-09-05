@@ -25,7 +25,11 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
 
         <nav className="flex flex-wrap gap-x-8 gap-y-2">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm text-ink-soft hover:text-ink">
+            <a
+              key={link.href}
+              href={link.href}
+              className="link-underline text-sm text-ink-soft hover:text-ink"
+            >
               {link.label}
             </a>
           ))}
@@ -55,7 +59,7 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
 
       <div className="border-t border-line px-5 py-6 sm:px-8">
         <p className="mx-auto max-w-6xl font-mono text-xs text-ink-faint">
-          © {year} Igor Lima. {dict.footer.rights}
+          © {year} Igor Lima Teixeira. {dict.footer.rights}
         </p>
       </div>
     </footer>

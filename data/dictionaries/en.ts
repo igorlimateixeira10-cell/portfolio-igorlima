@@ -2,7 +2,7 @@ import type { Dictionary } from "@/data/dictionaries/pt";
 
 export const en: Dictionary = {
   meta: {
-    title: "Igor Lima | Front-End Developer",
+    title: "Igor Lima Teixeira | Front-End Developer",
     description:
       "Front-End Developer specialized in React, Next.js and TypeScript. I build professional websites, landing pages and web applications for businesses in Brazil and abroad.",
   },
@@ -22,6 +22,7 @@ export const en: Dictionary = {
     ctaPrimary: "View projects",
     ctaSecondary: "Request a quote",
     availability: "Available for new projects",
+    proof: "3 real websites, already live",
   },
   techStack: {
     eyebrow: "Stack",
@@ -32,33 +33,10 @@ export const en: Dictionary = {
     title: "Featured projects",
     subtitle:
       "Real institutional websites, built and shipped for businesses across different industries.",
-    viewProject: "View project",
-    viewCode: "View code",
+    viewProject: "Visit the site",
+    viewCode: "View code on GitHub",
     otherProjects: "More technical projects on GitHub",
-    items: {
-      "site-leo": {
-        name: "Leonardo Pessanha — Psychologist",
-        category: "Institutional website",
-        description:
-          "Institutional website for a clinical psychologist based in Serra, Brazil, with a blog, WhatsApp booking and full technical SEO.",
-      },
-      clickcola: {
-        name: "Click Cola Instalações",
-        category: "Institutional website",
-        description:
-          "Institutional website for a flooring installation company in Colatina, Brazil, with a project gallery and a WhatsApp booking assistant.",
-      },
-      refriar: {
-        name: "Refriar",
-        category: "Institutional website",
-        description:
-          "Institutional website for an air conditioning and technical support company, with a quote form integrated with WhatsApp.",
-      },
-    },
-  },
-  cases: {
-    eyebrow: "Cases",
-    title: "How each project was solved",
+    caseLabel: "Case",
     labels: {
       objective: "Objective",
       tech: "Technologies",
@@ -67,6 +45,10 @@ export const en: Dictionary = {
     },
     items: {
       "site-leo": {
+        name: "Leonardo Pessanha — Psychologist",
+        category: "Institutional website",
+        description:
+          "Institutional website for a clinical psychologist based in Serra, Brazil, with a blog, WhatsApp booking and full technical SEO.",
         objective:
           "Give a clinical psychologist a professional online presence and make it easy to book sessions without relying only on social media.",
         solution:
@@ -75,6 +57,10 @@ export const en: Dictionary = {
           "Site published and live, with technical SEO in place (metadata, sitemap and Open Graph) for search engine indexing.",
       },
       clickcola: {
+        name: "Click Cola Instalações",
+        category: "Institutional website",
+        description:
+          "Institutional website for a flooring installation company in Colatina, Brazil, with a project gallery and a WhatsApp booking assistant.",
         objective:
           "Showcase a flooring installation company's portfolio and turn visits into quote requests.",
         solution:
@@ -82,6 +68,10 @@ export const en: Dictionary = {
         result: "Site published and live, with a working direct WhatsApp contact channel.",
       },
       refriar: {
+        name: "Refriar",
+        category: "Institutional website",
+        description:
+          "Institutional website for an air conditioning and technical support company, with a quote form integrated with WhatsApp.",
         objective:
           "Create a simple institutional page for an air conditioning and technical support company, with an easy way to request a quote.",
         solution:
@@ -89,6 +79,32 @@ export const en: Dictionary = {
         result: "Site published and live, ready to generate business contacts.",
       },
     },
+  },
+  whyMe: {
+    eyebrow: "Why work with me",
+    title: "What you get in every project",
+    items: [
+      {
+        title: "Direct contact, no middlemen",
+        description:
+          "You talk to me directly from start to finish — no account manager, no information passed down the chain.",
+      },
+      {
+        title: "Technical SEO from the first commit",
+        description:
+          "Metadata, Open Graph, sitemap and semantic structure are part of the site from day one, not a last-minute add-on.",
+      },
+      {
+        title: "A modern, sustainable stack",
+        description:
+          "React, Next.js and TypeScript: widely used in the industry, easy to maintain and hand off to any other developer later.",
+      },
+      {
+        title: "Tested before delivery",
+        description:
+          "Every project is checked on phone, tablet and desktop before going live — not just on my own monitor.",
+      },
+    ],
   },
   services: {
     eyebrow: "Services",
@@ -126,14 +142,22 @@ export const en: Dictionary = {
           "Fixes and improvements to existing websites: performance, responsiveness, SEO or new features.",
       },
     ],
+    ctaText: "Not sure which service fits your project? Let's talk",
+    ctaLink: "#contact",
   },
   about: {
     eyebrow: "About me",
-    title: "Igor Lima — Front-End Developer",
+    title: "Igor Lima Teixeira — Front-End Developer",
+    lead: "I'm a Front-End Developer focused on building modern, responsive and high-performing web interfaces.",
     paragraphs: [
-      "I'm a Front-End Developer focused on building modern, responsive and high-performing web interfaces.",
       "I work mainly with React, Next.js and TypeScript, combining visual quality, clean code and attention to user experience in every project.",
       "I've built institutional websites for real businesses, always aiming for a balance between design, load speed and long-term maintainability.",
+    ],
+    principlesLabel: "How I work",
+    principles: [
+      "Direct communication over WhatsApp, from quote to delivery.",
+      "Site published and tested across screen sizes before final delivery.",
+      "Organized code, built to be maintained and extended later.",
     ],
   },
   process: {
@@ -194,10 +218,10 @@ export const en: Dictionary = {
       note: "Sending this will open your default email app with the message ready to send.",
     },
     directTitle: "Or reach out directly",
-    email: "youremail@example.com",
-    whatsapp: "+55 (00) 00000-0000",
+    email: "igorlimateixeira10@gmail.com",
+    whatsapp: "+55 (27) 99653-0514",
+    whatsappMessage: "Hi! I found your portfolio and I'd like to talk about a project.",
     linkedin: "linkedin.com/in/igor-teixeira-4055232b8",
-    placeholder: "coming soon",
   },
   footer: {
     tagline: "Front-End Developer",

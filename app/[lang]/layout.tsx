@@ -68,12 +68,33 @@ export default async function LangLayout({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+  // Dados estruturados (schema.org/Person) com apenas informações reais e
+  // já públicas — nome, cargo e os mesmos perfis já linkados no site.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Igor Lima Teixeira",
+    jobTitle: "Front-End Developer",
+    url: `${siteUrl}/${lang}`,
+    sameAs: [
+      "https://github.com/igorlimateixeira10-cell",
+      "https://www.linkedin.com/in/igor-teixeira-4055232b8/",
+    ],
+    knowsAbout: ["React", "Next.js", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS"],
+  };
+
   return (
     <html
       lang={lang}
       className={`${instrumentSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-ink font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

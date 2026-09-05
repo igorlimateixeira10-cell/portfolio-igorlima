@@ -1,14 +1,15 @@
-import Image from "next/image";
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { projects } from "@/data/projects";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { Button } from "@/components/ui/Button";
 import { GitHubIcon, ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
 export function Projects({ dict }: { dict: Dictionary }) {
   return (
     <section id="projects" className="border-b border-line">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading
             eyebrow={dict.projects.eyebrow}
@@ -17,59 +18,84 @@ export function Projects({ dict }: { dict: Dictionary }) {
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-20 flex flex-col gap-24 sm:gap-32">
           {projects.map((project, i) => {
             const copy = dict.projects.items[project.slug];
+            const reversed = i % 2 === 1;
+            const index = String(i + 1).padStart(2, "0");
+
             return (
-              <Reveal key={project.slug} delay={i * 80}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-shadow hover:shadow-[0_16px_40px_-24px_rgba(11,13,18,0.35)]">
-                  <div className="relative aspect-[2/1] overflow-hidden border-b border-line bg-bg">
-                    <Image
-                      src={project.image}
-                      alt={copy.name}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
+              <Reveal key={project.slug} delay={i * 60}>
+                <article
+                  className={`grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-16 ${
+                    reversed ? "md:[&>*:first-child]:order-2" : ""
+                  }`}
+                >
+                  <BrowserFrame
+                    src={project.image}
+                    alt={copy.name}
+                    sizes="(min-width: 768px) 52vw, 92vw"
+                    className="transition-transform duration-500 hover:-translate-y-1.5"
+                  />
 
-                  <div className="flex flex-1 flex-col p-6">
+                  <div>
                     <span className="font-mono text-[11px] uppercase tracking-wide text-accent-ink">
-                      {copy.category}
+                      {dict.projects.caseLabel} {index} — {copy.category}
                     </span>
-                    <h3 className="mt-2 text-lg font-semibold text-ink">{copy.name}</h3>
-                    <p className="mt-2 flex-1 text-sm text-ink-soft">{copy.description}</p>
+                    <h3 className="mt-3 text-[1.75rem] font-semibold leading-tight tracking-tight text-ink">
+                      {copy.name}
+                    </h3>
+                    <p className="mt-3 text-base leading-relaxed text-ink-soft">
+                      {copy.description}
+                    </p>
 
-                    <div className="mt-4 flex flex-wrap gap-1.5">
+                    <dl className="mt-7 flex flex-col gap-5 border-t border-line pt-6">
+                      <div>
+                        <dt className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+                          {dict.projects.labels.objective}
+                        </dt>
+                        <dd className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                          {copy.objective}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+                          {dict.projects.labels.solution}
+                        </dt>
+                        <dd className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                          {copy.solution}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+                          {dict.projects.labels.result}
+                        </dt>
+                        <dd className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                          {copy.result}
+                        </dd>
+                      </div>
+                    </dl>
+
+                    <div className="mt-6 flex flex-wrap gap-1.5">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-md bg-bg px-2 py-1 font-mono text-[11px] text-ink-soft"
+                          className="rounded-md bg-surface px-2 py-1 font-mono text-[11px] text-ink-soft ring-1 ring-line"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
 
-                    <div className="mt-6 flex items-center gap-4 border-t border-line pt-4">
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-accent-ink"
-                      >
+                    <div className="mt-7 flex flex-wrap items-center gap-3">
+                      <Button href={project.liveUrl} variant="accent" className="group">
                         {dict.projects.viewProject}
-                        <ArrowUpRightIcon className="h-3.5 w-3.5" />
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${copy.name} — ${dict.projects.viewCode}`}
-                        className="ml-auto text-ink-faint hover:text-ink"
-                      >
+                        <ArrowUpRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </Button>
+                      <Button href={project.githubUrl} variant="secondary">
                         <GitHubIcon className="h-4 w-4" />
-                      </a>
+                        {dict.projects.viewCode}
+                      </Button>
                     </div>
                   </div>
                 </article>
@@ -83,7 +109,7 @@ export function Projects({ dict }: { dict: Dictionary }) {
             href="https://github.com/igorlimateixeira10-cell?tab=repositories"
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
+            className="link-underline mt-16 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
           >
             {dict.projects.otherProjects}
             <ArrowUpRightIcon className="h-3.5 w-3.5" />

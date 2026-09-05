@@ -29,7 +29,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-ink-soft transition-colors hover:text-ink"
+              className="link-underline text-sm text-ink-soft transition-colors hover:text-ink"
             >
               {link.label}
             </a>
@@ -40,7 +40,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           <LanguageSwitch current={locale} />
           <a
             href="#contact"
-            className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-bg transition-colors hover:bg-accent-ink"
+            className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-[0_1px_2px_rgba(11,13,18,0.06)] transition-all hover:bg-accent-ink hover:shadow-[0_4px_16px_-4px_rgba(47,92,246,0.5)]"
           >
             {dict.nav.cta}
           </a>
@@ -82,7 +82,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="flex-1 rounded-full bg-ink px-5 py-3 text-center text-sm font-medium text-bg"
+              className="flex-1 rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-white"
             >
               {dict.nav.cta}
             </a>

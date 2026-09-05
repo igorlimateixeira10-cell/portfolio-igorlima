@@ -14,12 +14,12 @@ export function SectionHeading({
       <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
         {eyebrow}
       </span>
-      <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      <h2 className="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-[2.75rem]">
         {title}
       </h2>
       {subtitle && (
         <p
-          className={`mt-4 max-w-2xl text-base text-ink-soft ${align === "center" ? "mx-auto" : ""}`}
+          className={`mt-4 max-w-2xl text-base leading-relaxed text-ink-soft ${align === "center" ? "mx-auto" : ""}`}
         >
           {subtitle}
         </p>
