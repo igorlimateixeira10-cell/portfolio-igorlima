@@ -1,5 +1,6 @@
 import { isLocale, defaultLocale, getDictionary } from "@/lib/i18n";
 import { notFound } from "next/navigation";
+import { SiteWallpaper } from "@/components/wallpaper/SiteWallpaper";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/sections/Hero";
@@ -26,6 +27,7 @@ export default async function HomePage({
 
   return (
     <>
+      <SiteWallpaper />
       <Header dict={dict} locale={locale} />
       <main className="flex-1">
         <Hero dict={dict} />

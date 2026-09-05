@@ -1,72 +1,47 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Button } from "@/components/ui/Button";
 import { ArrowUpRightIcon, WhatsAppIcon } from "@/components/icons/SocialIcons";
-import {
-  GlobeIcon,
-  TargetIcon,
-  BuildingIcon,
-  CartIcon,
-  TerminalIcon,
-  WrenchIcon,
-} from "@/components/icons/ServiceIcons";
 import { WHATSAPP_NUMBER } from "@/lib/contact";
 
-// Mesmos ícones e nomes da seção Serviços — reaproveitados aqui como o
-// conteúdo do fundo "andando sozinho" (ver .hero-marquee no globals.css).
-// Reusar em vez de inventar rótulos novos mantém tudo no dicionário e
-// consistente com o resto do site.
-const icons = [GlobeIcon, TargetIcon, BuildingIcon, CartIcon, TerminalIcon, WrenchIcon];
-
-// Hero: fundo com duas fileiras de ícones de negócio deslizando em loop
-// contínuo (puro CSS, sem JS, sem depender do mouse) atrás de um glow
-// verde e um degradê escuro pra legibilidade. O título tem um trecho em
-// degradê. Nada aqui precisa de "use client".
+// O cenário (estátua, glow, linhas, partículas) não vive mais aqui — é o
+// <SiteWallpaper /> global (renderizado uma vez em app/[lang]/page.tsx,
+// atrás do Header/main inteiro), fixo na viewport o tempo todo, inclusive
+// depois que esta section rola pra fora de vista. Aqui sobra só o texto
+// e a legibilidade LOCAL dele — a mesma lógica de sempre (coluna estreita
+// ao lado da estátua a partir do `lg`; abaixo disso, texto por cima dela)
+// continua fazendo sentido porque a estátua do wallpaper ocupa a mesma
+// posição de tela que ocupava antes.
 export function Hero({ dict }: { dict: Dictionary }) {
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     dict.contact.whatsappMessage
   )}`;
 
-  const chips = dict.services.items.map((item, i) => ({ label: item.title, Icon: icons[i] }));
-
   return (
-    <section id="home" className="relative isolate min-h-[100svh] overflow-hidden border-b border-line bg-bg">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(circle at 72% 34%, rgba(72,230,50,0.16), transparent 60%)",
-          }}
-        />
+    <section id="home" className="relative min-h-[100svh] overflow-hidden">
+      {/* Legibilidade do texto — duas versões, porque a composição muda no
+          `lg`: até `md` (uma coluna só, texto por cima da estátua) precisa
+          de uma faixa escura bem mais larga; no `lg` (estátua ao lado,
+          não por baixo) o degradê esvai rápido, bem antes dela começar. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 lg:hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(100deg, var(--bg) 0%, rgba(8,10,8,0.92) 45%, rgba(8,10,8,0.55) 62%, transparent 82%), linear-gradient(to top, var(--bg) 0%, transparent 16%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 hidden lg:block"
+        style={{
+          backgroundImage:
+            "linear-gradient(100deg, var(--bg) 0%, rgba(8,10,8,0.92) 20%, rgba(8,10,8,0.5) 30%, transparent 42%), linear-gradient(to top, var(--bg) 0%, transparent 16%)",
+        }}
+      />
 
-        {/* As duas fileiras de ícones — deslizam sozinhas, sentidos opostos. */}
-        <div className="absolute inset-x-0 top-[18%] flex flex-col gap-8 opacity-[0.16] sm:top-[14%]">
-          {[false, true].map((reverse) => (
-            <div key={String(reverse)} className="hero-marquee">
-              <div className={`hero-marquee-track gap-8 ${reverse ? "hero-marquee-track--reverse" : ""}`}>
-                {[...chips, ...chips].map(({ label, Icon }, i) => (
-                  <div
-                    key={`${label}-${i}`}
-                    className="flex flex-none items-center gap-2.5 rounded-full border border-line px-5 py-2.5"
-                  >
-                    <Icon className="h-4 w-4 text-ink-soft" />
-                    <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-wide text-ink-soft">
-                      {label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(100deg, var(--bg) 0%, rgba(8,10,8,0.94) 42%, rgba(8,10,8,0.55) 66%, rgba(8,10,8,0.18) 88%, transparent 100%), linear-gradient(to top, rgba(8,10,8,0.75) 0%, transparent 32%)",
-          }}
-        />
-      </div>
+      {/* Até o tablet a estátua fica atrás/ao redor do texto (uma coluna
+          só) — um reforço extra de escurecimento mantém tudo legível. */}
+      <div aria-hidden className="absolute inset-0 bg-bg/45 lg:hidden" />
 
       <div className="relative mx-auto flex min-h-[100svh] max-w-6xl items-center px-5 pb-16 pt-28 sm:px-8 lg:pt-24">
         <div className="max-w-xl">

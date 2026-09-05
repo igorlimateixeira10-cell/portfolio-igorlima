@@ -33,10 +33,8 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-        scrolled || open
-          ? "border-line bg-bg/85 backdrop-blur-xl"
-          : "border-transparent bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled || open ? "bg-bg" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8 lg:h-24">
@@ -85,7 +83,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-line bg-bg/95 px-5 pb-6 backdrop-blur-xl lg:hidden">
+        <div id="mobile-menu" className="border-t border-line bg-bg px-5 pb-6 lg:hidden">
           <nav className="flex flex-col gap-1 pt-4">
             {links.map((link) => (
               <a

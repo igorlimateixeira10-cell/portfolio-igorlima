@@ -219,41 +219,80 @@ body {
 }
 
 /*
- * Fundo do Hero "andando sozinho": duas fileiras de ícones de negócio
- * (os mesmos da seção Serviços) deslizando em loop contínuo, sem
- * depender do mouse. Cada fileira duplica seu conteúdo (ver Hero.tsx) e
- * anima só metade do percurso — translateX(-50%) — pra fechar o loop
- * sem salto perceptível. Sentidos opostos (normal / reverse) dão uma
- * leve sensação de profundidade entre as duas fileiras.
+ * Cenário fixo do Hero (ver components/hero/HeroBackdrop.tsx) — duas peças:
+ *
+ * 1) .hero-blob: as "ilhas" grandes e desfocadas (azul/roxo/verde) que
+ *    nunca param — só CSS, sem depender de JS/mouse. Posição e tamanho
+ *    vêm inline (left/top/width/height por instância); a classe cuida só
+ *    da aparência (blur, formato) e da animação contínua (transform).
+ * 2) .hero-energy-line: o traço de cada linha de energia "flui" ao longo
+ *    da curva via stroke-dashoffset, sem depender de JS.
+ * As partículas pequenas (Camada 4) são Canvas2D — não precisam de CSS.
  */
-.hero-marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  /* blur() grande é caro pro compositor — mais leve em telas estreitas
+     (celular), onde além de menos necessário visualmente, ajuda a
+     reduzir o trabalho da GPU bem no momento em que o usuário começa a
+     rolar a página (é quando o SiteWallpaper fixed + os canvases da
+     estátua/partículas mais precisam recompor). */
+  filter: blur(60px);
+  will-change: transform;
+  animation-name: hero-blob-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
-.hero-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: hero-marquee-scroll 46s linear infinite;
-}
-
-.hero-marquee-track--reverse {
-  animation-direction: reverse;
-  animation-duration: 58s;
-}
-
-@keyframes hero-marquee-scroll {
-  from {
-    transform: translateX(0);
+@media (min-width: 640px) {
+  .hero-blob {
+    filter: blur(110px);
   }
+}
+
+@keyframes hero-blob-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(5%, -6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-6%, 5%, 0) scale(0.94);
+  }
+}
+
+.hero-energy-line {
+  stroke-linecap: round;
+  animation-name: hero-energy-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes hero-energy-flow {
   to {
-    transform: translateX(-50%);
+    stroke-dashoffset: -640;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-marquee-track {
-    animation: none;
+/* Molho de linhas de onda — 5 curvas coladas (mesmo período, deslocadas
+   só alguns px na vertical) que sobem e descem juntas devagar, além do
+   fluxo do stroke-dashoffset de cada uma. É a combinação das duas
+   animações — balanço + fluxo — que dá a sensação de onda "andando"
+   pela tela, não só uma linha estática que pisca. */
+.hero-wave-group {
+  animation-name: hero-wave-bob;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes hero-wave-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
   }
 }

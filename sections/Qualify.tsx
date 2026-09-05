@@ -48,7 +48,10 @@ const icons = [OutdatedIcon, LostClientIcon, CheckIcon];
 // (nomes reais de clientes) em vez de repetir a proof-line do Hero.
 export function Qualify({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line bg-surface">
+    // bg-bg/85 (não opaco): deixa o SiteWallpaper (fixo, atrás de toda a
+    // página) aparecer de leve por trás — o suficiente pra manter o
+    // texto legível sem "matar" o efeito de papel de parede vivo.
+    <section className="border-b border-line bg-bg/85">
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
           <h2 className="text-balance text-2xl font-semibold leading-tight tracking-tight text-ink sm:text-[2rem]">

@@ -17,7 +17,7 @@ function CheckIcon() {
 
 export function WhyMe({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line bg-surface">
+    <section className="border-b border-line bg-surface/85">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">

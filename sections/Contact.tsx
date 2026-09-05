@@ -15,7 +15,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
   )}`;
 
   return (
-    <section id="contact">
+    <section id="contact" className="bg-bg/80">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr]">
           <div>
@@ -89,7 +89,10 @@ export function Contact({ dict }: { dict: Dictionary }) {
           </div>
 
           <Reveal delay={120}>
-            <div className="rounded-2xl border border-line bg-surface/60 p-6 backdrop-blur-sm sm:p-8">
+            {/* bg-surface quase opaco (não /60 como antes): é um formulário de
+                verdade, precisa de contraste alto pros campos — o SiteWallpaper
+                atrás da página já aparece nas bordas/entrelinhas da section. */}
+            <div className="rounded-2xl border border-line bg-surface/95 p-6 backdrop-blur-sm sm:p-8">
               <ContactForm dict={dict.contact.form} />
             </div>
           </Reveal>

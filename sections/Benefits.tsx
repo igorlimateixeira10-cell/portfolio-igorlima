@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 // biblioteca nova.
 export function Benefits({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line bg-surface/40">
+    <section className="border-b border-line bg-surface/70">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
         <h2 className="sr-only">{dict.benefits.title}</h2>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
