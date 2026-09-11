@@ -1,6 +1,7 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TiltCard } from "@/components/ui/TiltCard";
 import { ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 import {
   GlobeIcon,
@@ -34,16 +35,18 @@ export function Services({ dict }: { dict: Dictionary }) {
                 const index = String(i + 1).padStart(2, "0");
                 return (
                   <Reveal key={service.title} delay={i * 50} className="h-full">
-                    <div className="glow-card tech-card group flex h-full flex-col gap-3 rounded-2xl p-7">
-                      <div className="flex items-start justify-between">
-                        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent-ink transition-transform duration-200 group-hover:scale-105">
-                          <Icon className="h-5 w-5" />
-                        </span>
-                        <span className="font-mono text-xs text-ink-faint">{index}</span>
+                    <TiltCard className="h-full">
+                      <div className="glow-card tech-card group flex h-full flex-col gap-3 rounded-2xl p-7">
+                        <div className="flex items-start justify-between">
+                          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent-ink transition-transform duration-200 group-hover:scale-105">
+                            <Icon className="h-5 w-5" />
+                          </span>
+                          <span className="font-mono text-xs text-ink-faint">{index}</span>
+                        </div>
+                        <h3 className="mt-1 text-base font-semibold text-ink">{service.title}</h3>
+                        <p className="text-sm leading-relaxed text-ink-soft">{service.description}</p>
                       </div>
-                      <h3 className="mt-1 text-base font-semibold text-ink">{service.title}</h3>
-                      <p className="text-sm leading-relaxed text-ink-soft">{service.description}</p>
-                    </div>
+                    </TiltCard>
                   </Reveal>
                 );
               })}

@@ -25,7 +25,7 @@ export function FAQ({ dict }: { dict: Dictionary }) {
     <section id="faq" className="border-b border-line bg-surface/70">
       <div className="mx-auto max-w-3xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <SectionHeading eyebrow={dict.faq.eyebrow} title={dict.faq.title} align="center" />
+          <SectionHeading eyebrow={dict.faq.eyebrow} title={dict.faq.title} align="center" size="md" />
         </Reveal>
 
         <div className="mt-12 flex flex-col gap-3">

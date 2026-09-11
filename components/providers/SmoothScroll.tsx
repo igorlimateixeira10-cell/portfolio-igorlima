@@ -54,8 +54,9 @@ export function SmoothScroll() {
     }
     document.addEventListener("click", onClick);
 
-    // Mesma ideia do resto do site (RobotHead, etc.): pausa o loop com a
-    // aba oculta, sem custo de rAF rodando à toa em background.
+    // Mesma ideia do resto do site (CoreEmblem, SiteBackground, etc.):
+    // pausa o loop com a aba oculta, sem custo de rAF rodando à toa em
+    // background.
     function onVisibilityChange() {
       if (document.hidden) {
         cancelAnimationFrame(rafId);

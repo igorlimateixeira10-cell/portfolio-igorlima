@@ -11,17 +11,21 @@ export function Process({ dict }: { dict: Dictionary }) {
     <section className="border-b border-line bg-bg/80">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <SectionHeading eyebrow={dict.process.eyebrow} title={dict.process.title} />
+          <SectionHeading eyebrow={dict.process.eyebrow} title={dict.process.title} size="md" />
         </Reveal>
 
         <ol className="relative mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
           {/* Linha conectando os círculos — só a partir do `lg` (colunas
               de verdade lado a lado); nas grades menores os passos empilham
-              e a linha perderia o sentido. */}
+              e a linha perderia o sentido. Um pulso de sinal percorre ela
+              (mesma técnica do SignalDivider), reforçando a leitura de
+              "processo em andamento" em vez de uma régua estática. */}
           <div
             aria-hidden
-            className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-line to-transparent lg:block"
-          />
+            className="signal-divider absolute left-0 right-0 top-6 hidden lg:block"
+          >
+            <span className="signal-divider__pulse" />
+          </div>
 
           {dict.process.steps.map((step, i) => (
             <Reveal key={step.number} delay={i * 60} as="li" className="relative flex flex-col gap-3">

@@ -6,6 +6,7 @@ import type { Dictionary } from "@/data/dictionaries/pt";
 import type { Locale } from "@/lib/i18n";
 import { LanguageSwitch } from "@/components/layout/LanguageSwitch";
 import { LogoCoin } from "@/components/layout/LogoCoin";
+import { useActiveSection } from "@/components/layout/useActiveSection";
 import { ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
 export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
@@ -33,6 +34,12 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
     { href: "#contact", label: dict.nav.contact },
   ];
 
+  // Qual section está mais visível agora — os `id`s batem com os `href`
+  // acima sem o "#" (ver os respectivos <section id="..."> em
+  // sections/Hero.tsx, Projects.tsx, Services.tsx, About.tsx,
+  // Contact.tsx). Antes, só "Início" ficava marcado, sempre.
+  const activeId = useActiveSection(links.map((link) => link.href.slice(1)));
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -49,15 +56,17 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         </Link>
 
         {/* Nav em pílula segmentada — cada link é sua própria cápsula
-            dentro de um contêiner arredondado, com a âncora atual (Início)
-            marcada em destaque. */}
+            dentro de um contêiner arredondado, com a âncora da section
+            visível agora marcada em destaque (scroll-spy real, ver
+            useActiveSection.ts — antes só "Início" ficava marcado). */}
         <nav className="hidden items-center gap-1 rounded-full border border-line bg-bg/40 p-1 backdrop-blur-sm lg:flex">
-          {links.map((link, i) => (
+          {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
+              aria-current={link.href.slice(1) === activeId ? "true" : undefined}
               className={`rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-wide transition-colors ${
-                i === 0
+                link.href.slice(1) === activeId
                   ? "bg-accent/15 text-accent-ink ring-1 ring-inset ring-accent/30"
                   : "text-ink-soft hover:bg-white/5 hover:text-ink"
               }`}

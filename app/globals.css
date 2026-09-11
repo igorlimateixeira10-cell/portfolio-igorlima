@@ -970,3 +970,166 @@ article:focus-within img {
     animation: none;
   }
 }
+
+/* Núcleo IA da Hero (ver components/hero/AiCoreScene.tsx e
+   AiCoreFallback.tsx) — mesma língua visual/técnica já validada no
+   robô 3D anterior: fundo do <canvas> transparente de verdade
+   (gl={{alpha:true}} + setClearColor(0,0)), glow azul atrás só um blur,
+   sem card/moldura nenhuma. */
+.aicore-glow {
+  position: absolute;
+  inset: -18%;
+  border-radius: 9999px;
+  filter: blur(64px);
+  background: radial-gradient(circle, rgba(var(--accent-glow), 0.4), transparent 70%);
+  pointer-events: none;
+}
+
+.aicore-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.aicore-canvas canvas {
+  touch-action: none;
+}
+.aicore-canvas--ready {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aicore-canvas {
+    transition: opacity 0.3s linear;
+    transform: none;
+  }
+}
+
+/* Fallback SVG (sem Three.js) — flutua devagar e os dois anéis giram em
+   sentidos opostos, mesmo espírito do robô/logo do resto do site. */
+.aicore-fallback-float {
+  animation: aicore-fallback-float 6s ease-in-out infinite;
+}
+@keyframes aicore-fallback-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.aicore-fallback-ring-spin {
+  animation: aicore-fallback-spin 6s linear infinite;
+}
+@keyframes aicore-fallback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.aicore-fallback-pulse {
+  animation: aicore-fallback-pulse 2.6s ease-in-out infinite;
+}
+@keyframes aicore-fallback-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aicore-fallback-float,
+  .aicore-fallback-ring-spin,
+  .aicore-fallback-pulse {
+    animation: none;
+  }
+}
+
+/* Reformulação visual — utilitários compartilhados entre seções (ver
+   components/ui/TiltCard.tsx, SignalDivider.tsx, CountUp.tsx). */
+
+/* Tilt 3D reutilizável nos cards (Benefits/Services/Projects) — o JS
+   (TiltCard.tsx) escreve `transform` inline no mousemove; esta classe só
+   cuida da transição de VOLTA suave quando o mouse sai (o inline style
+   vira "" e o card anima de volta ao repouso via esta transition). */
+.tilt-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transition: none;
+  }
+}
+
+/* Linha de sinal — divisor animado entre seções (ver SignalDivider.tsx),
+   reaproveitado também na linha do Processo. Um trecho de gradiente
+   "varre" a linha da esquerda pra direita, contínuo. */
+.signal-divider {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: var(--line);
+}
+.signal-divider__pulse {
+  position: absolute;
+  inset: 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-glow), 0.9), var(--accent-2), transparent);
+  animation: signal-divider-sweep 3.4s ease-in-out infinite;
+}
+@keyframes signal-divider-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(420%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-divider__pulse {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* Grade da Stack — célula ganha profundidade real no hover (a versão
+   anterior só trocava a cor do ícone). */
+.tech-grid-cell {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+.tech-grid-cell:hover,
+.tech-grid-cell:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px -18px rgba(var(--accent-glow), 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-grid-cell {
+    transition: box-shadow 0.3s ease;
+  }
+  .tech-grid-cell:hover,
+  .tech-grid-cell:focus-within {
+    transform: none;
+  }
+}
+
+/* Linha de luz no topo do Footer — ecoa o véu do Header, fecha o
+   "envelope" visual da página. */
+.footer-top-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-glow), 0.5), transparent);
+}

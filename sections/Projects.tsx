@@ -2,7 +2,7 @@ import type { Dictionary } from "@/data/dictionaries/pt";
 import { projects } from "@/data/projects";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { ProjectVisual } from "@/components/projects/ProjectVisual";
 import { Button } from "@/components/ui/Button";
 import { GitHubIcon, ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
@@ -44,20 +44,19 @@ export function Projects({ dict }: { dict: Dictionary }) {
                   </span>
 
                   {/* Cantos técnicos — mesmo motivo usado no anel do Hero,
-                      aqui marcando o card inteiro como um "quadro" de case. */}
+                      aqui marcando o card inteiro como um "quadro" de case
+                      (os 4 cantos, não só os de cima). */}
                   <span aria-hidden className="pointer-events-none absolute left-4 top-4 h-3 w-3 border-l border-t border-accent/50" />
                   <span aria-hidden className="pointer-events-none absolute right-4 top-4 h-3 w-3 border-r border-t border-accent/50" />
+                  <span aria-hidden className="pointer-events-none absolute bottom-4 left-4 h-3 w-3 border-b border-l border-accent/50" />
+                  <span aria-hidden className="pointer-events-none absolute bottom-4 right-4 h-3 w-3 border-b border-r border-accent/50" />
 
                   <div
                     className={`grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-16 ${
                       reversed ? "md:[&>*:first-child]:order-2" : ""
                     }`}
                   >
-                    <BrowserFrame
-                      src={project.image}
-                      alt={copy.name}
-                      sizes="(min-width: 768px) 52vw, 92vw"
-                    />
+                    <ProjectVisual image={project.image} alt={copy.name} />
 
                     <div>
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-bg/50 px-3 py-1 font-mono text-[11px] uppercase tracking-wide text-accent-ink">

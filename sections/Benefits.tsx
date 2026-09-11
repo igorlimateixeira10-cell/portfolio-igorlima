@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 // Faixa de benefícios logo abaixo do Hero — cards tecnológicos (mesma
 // linguagem visual do resto do site: vidro escuro, borda sutil, número
@@ -12,11 +13,13 @@ export function Benefits({ dict }: { dict: Dictionary }) {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {dict.benefits.items.map((item, i) => (
             <Reveal key={item.number} delay={i * 60} className="h-full">
-              <div className="tech-card glow-card flex h-full flex-col gap-2 rounded-2xl p-6">
-                <span className="font-mono text-sm text-accent-ink">{item.number}</span>
-                <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-ink-soft">{item.description}</p>
-              </div>
+              <TiltCard className="h-full">
+                <div className="tech-card glow-card flex h-full flex-col gap-2 rounded-2xl p-6">
+                  <span className="font-mono text-sm text-accent-ink">{item.number}</span>
+                  <h3 className="text-lg font-semibold text-ink">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-ink-soft">{item.description}</p>
+                </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

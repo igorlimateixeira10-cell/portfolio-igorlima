@@ -63,8 +63,8 @@ export function Qualify({ dict }: { dict: Dictionary }) {
           {dict.qualify.items.map((text, i) => {
             const Icon = icons[i];
             return (
-              <Reveal key={text} delay={i * 60}>
-                <div className="flex flex-col gap-4">
+              <Reveal key={text} delay={i * 60} className="h-full">
+                <div className="tech-card glow-card flex h-full flex-col gap-4 rounded-2xl p-6">
                   <div className="flex items-center gap-3">
                     <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent/10 text-accent-ink">
                       <Icon className="h-5 w-5" />

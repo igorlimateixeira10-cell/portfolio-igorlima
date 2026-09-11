@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
+import { CountUp } from "@/components/ui/CountUp";
 import { projects } from "@/data/projects";
 import { stack } from "@/sections/TechStack";
 
@@ -7,11 +8,13 @@ export function About({ dict }: { dict: Dictionary }) {
   // Números reais, derivados dos próprios dados do site (não inventados):
   // quantidade de projetos publicados, etapas do processo de trabalho e
   // tecnologias do stack — a mesma ideia da referência ("120+", "230+"),
-  // só que com fatos verificáveis no próprio código.
+  // só que com fatos verificáveis no próprio código. `CountUp` só anima
+  // a APRESENTAÇÃO desses valores (sobe de 0 até o número real ao entrar
+  // na tela) — o valor em si continua vindo daqui, nunca inventado.
   const stats = [
-    { value: String(projects.length).padStart(2, "0"), label: dict.projects.title },
-    { value: String(dict.process.steps.length).padStart(2, "0"), label: dict.process.title },
-    { value: String(stack.length), label: dict.techStack.eyebrow },
+    { value: projects.length, label: dict.projects.title },
+    { value: dict.process.steps.length, label: dict.process.title },
+    { value: stack.length, label: dict.techStack.eyebrow },
   ];
 
   return (
@@ -31,7 +34,9 @@ export function About({ dict }: { dict: Dictionary }) {
             <div className="mt-10 grid grid-cols-3 gap-3">
               {stats.map((stat) => (
                 <div key={stat.label} className="tech-card rounded-2xl px-3 py-4">
-                  <p className="font-mono text-2xl font-semibold text-ink">{stat.value}</p>
+                  <p className="font-mono text-2xl font-semibold text-ink">
+                    <CountUp value={stat.value} />
+                  </p>
                   <p className="mt-1 text-[10px] uppercase leading-tight tracking-wide text-ink-faint">
                     {stat.label}
                   </p>

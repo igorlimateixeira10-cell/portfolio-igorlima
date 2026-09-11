@@ -17,6 +17,7 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
     // bg-bg/85 (não opaco): deixa o SiteBackground (fixo, atrás da página)
     // continuar visível de leve até o fim da página.
     <footer className="border-t border-line bg-bg/85">
+      <div className="footer-top-glow" aria-hidden />
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-start md:justify-between">
         <div>
           <Link href={`/${locale}#home`} className="font-mono text-sm font-semibold tracking-widest">

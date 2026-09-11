@@ -1,7 +1,7 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/layout/ContactForm";
-import { RobotHead } from "@/components/contact/RobotHead";
+import { CoreEmblem } from "@/components/contact/CoreEmblem";
 import {
   WhatsAppIcon,
   MailIcon,
@@ -22,11 +22,11 @@ export function Contact({ dict }: { dict: Dictionary }) {
             também é tratada como um bloco/produto único, não uma seção
             solta no fundo do site. */}
         <div className="tech-panel relative rounded-4xl p-6 sm:p-10 lg:p-14">
-          {/* Ilustração decorativa (referência: a cabeça de IA ao lado do
-              formulário no mockup enviado) — só a partir do `xl`, atrás
-              do conteúdo, bem discreta pra não brigar com o formulário. */}
+          {/* Ilustração decorativa — mesma linguagem visual do Núcleo IA da
+              Hero (ver CoreEmblem.tsx) — só a partir do `xl`, atrás do
+              conteúdo, bem discreta pra não brigar com o formulário. */}
           <div className="pointer-events-none absolute bottom-8 right-10 hidden w-56 opacity-60 xl:block">
-            <RobotHead />
+            <CoreEmblem />
           </div>
 
           <div className="relative grid gap-14 lg:grid-cols-[1fr_1.3fr]">

@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   ReactIcon,
   NextIcon,
@@ -27,15 +28,13 @@ export function TechStack({ dict }: { dict: Dictionary }) {
     <section className="border-b border-line bg-surface/85">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
-            {dict.techStack.eyebrow} — {dict.techStack.title}
-          </p>
+          <SectionHeading eyebrow={dict.techStack.eyebrow} title={dict.techStack.title} size="md" />
         </Reveal>
 
-        <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {stack.map(({ name, Icon }, i) => (
             <Reveal key={name} delay={i * 40}>
-              <div className="group flex h-28 flex-col items-center justify-center gap-2.5 bg-surface px-2 text-center transition-colors hover:bg-bg">
+              <div className="tech-card tech-grid-cell group flex h-28 flex-col items-center justify-center gap-2.5 rounded-2xl px-2 text-center">
                 <Icon className="h-6 w-6 text-ink-soft transition-colors duration-200 group-hover:text-accent-ink" />
                 <span className="font-mono text-[11px] text-ink-soft">{name}</span>
               </div>
