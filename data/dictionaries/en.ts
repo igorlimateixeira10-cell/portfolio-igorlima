@@ -12,7 +12,7 @@ export const en: Dictionary = {
     services: "Services",
     about: "About",
     contact: "Contact",
-    cta: "Request a quote",
+    cta: "Contact me",
   },
   hero: {
     eyebrow: "Front-End Developer",
@@ -77,6 +77,7 @@ export const en: Dictionary = {
     subtitle:
       "Real institutional websites, built and shipped for businesses across different industries.",
     viewProject: "Visit the site",
+    viewDetails: "View details",
     viewCode: "View code on GitHub",
     otherProjects: "More technical projects on GitHub",
     caseLabel: "Case",
@@ -258,7 +259,8 @@ export const en: Dictionary = {
       ],
       message: "Message",
       submit: "Send message",
-      note: "Sending this will open your default email app with the message ready to send.",
+      note: "Sending this will open WhatsApp with your message ready to send.",
+      emailInvalid: "This email is incorrect. Enter a valid email address.",
     },
     directTitle: "Or reach out directly",
     whatsappCta: "Chat on WhatsApp",

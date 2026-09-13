@@ -1,17 +1,15 @@
 /**
  * Ilustração decorativa do Contato — substitui o `RobotHead.tsx` (busto
  * de robô em SVG) por um emblema no MESMO idioma visual do Núcleo IA da
- * Hero (ver components/three/AiCore.tsx): núcleo facetado + anel
- * orbital + glow azul. Antes, o Contato "falava" uma linguagem visual
- * diferente da Hero (robô vs. núcleo abstrato) — isso fecha o círculo,
- * o site inteiro usa o mesmo vocabulário. `RobotHead.tsx` continua no
- * projeto, só sem uso (ver relatório final).
+ * Hero: núcleo facetado + anel orbital + glow azul. Antes, o Contato
+ * "falava" uma linguagem visual diferente da Hero (robô vs. núcleo
+ * abstrato) — isso fecha o círculo, e o site inteiro usa o mesmo
+ * vocabulário.
  *
  * 100% SVG + CSS (sem Three.js aqui — é decorativo, atrás do formulário,
  * não precisa do custo de WebGL pra isso). Três animações, todas
  * desligadas por `prefers-reduced-motion` (mesmas classes/keyframes já
- * usados no Núcleo IA e no `AiCoreFallback.tsx`, reaproveitados aqui de
- * propósito — é o mesmo motivo, não uma cópia divergente):
+ * reaproveitados aqui de propósito):
  * `.aicore-fallback-float` (flutua), `.aicore-fallback-ring-spin`
  * (anel gira), `.aicore-fallback-pulse` (núcleo pulsa).
  */

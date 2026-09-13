@@ -16,7 +16,7 @@ const icons = [GlobeIcon, TargetIcon, BuildingIcon, CartIcon, TerminalIcon, Wren
 
 export function Services({ dict }: { dict: Dictionary }) {
   return (
-    <section id="services" className="border-b border-line bg-bg/80">
+    <section id="services" className="ark-section ark-services">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         {/* Painel único envolvendo a seção inteira — a referência trata
             "Serviços" como um grande bloco/produto, não uma lista solta

@@ -11,6 +11,7 @@ import { ArrowUpRightIcon } from "@/components/icons/SocialIcons";
 
 export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const [open, setOpen] = useState(false);
+  const [clickedHref, setClickedHref] = useState<string | null>(null);
   // Sem fundo sobre o Hero; ganha um véu (blur + borda) assim que a
   // página rola — sem isso o header (fixed) fica ilegível por cima do
   // conteúdo das outras seções. Os elementos (nav em pílula, botões) já
@@ -40,9 +41,16 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   // Contact.tsx). Antes, só "Início" ficava marcado, sempre.
   const activeId = useActiveSection(links.map((link) => link.href.slice(1)));
 
+  function handleNavClick(href: string) {
+    setClickedHref(href);
+    window.setTimeout(() => {
+      setClickedHref((current) => (current === href ? null : current));
+    }, 420);
+  }
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`ark-header fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open ? "bg-bg/70 backdrop-blur-xl" : "bg-transparent"
       }`}
     >
@@ -64,8 +72,11 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             <a
               key={link.href}
               href={link.href}
+              onClick={() => handleNavClick(link.href)}
               aria-current={link.href.slice(1) === activeId ? "true" : undefined}
-              className={`rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-wide transition-colors ${
+              className={`ark-nav-link rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-wide transition-colors ${
+                clickedHref === link.href ? "ark-nav-link--clicked" : ""
+              } ${
                 link.href.slice(1) === activeId
                   ? "bg-accent/15 text-accent-ink ring-1 ring-inset ring-accent/30"
                   : "text-ink-soft hover:bg-white/5 hover:text-ink"
@@ -80,7 +91,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           <LanguageSwitch current={locale} />
           <a
             href="#contact"
-            className="group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-ink shadow-[0_0_24px_-8px_rgba(var(--accent-glow),0.75)] transition-all hover:bg-accent-hover hover:shadow-[0_0_30px_-6px_rgba(var(--accent-glow),0.8)]"
+            className="ark-header-cta group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-ink shadow-[0_0_24px_-8px_rgba(var(--accent-glow),0.75)] transition-all hover:bg-accent-hover hover:shadow-[0_0_30px_-6px_rgba(var(--accent-glow),0.8)]"
           >
             {dict.nav.cta}
             <ArrowUpRightIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -111,8 +122,13 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-3 text-base text-ink-soft transition-colors hover:bg-white/5 hover:text-ink"
+                onClick={() => {
+                  handleNavClick(link.href);
+                  setOpen(false);
+                }}
+                className={`ark-nav-link rounded-xl px-3 py-3 text-base text-ink-soft transition-colors hover:bg-white/5 hover:text-ink ${
+                  clickedHref === link.href ? "ark-nav-link--clicked" : ""
+                }`}
               >
                 {link.label}
               </a>
@@ -122,7 +138,7 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="flex-1 rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-ink"
+                className="ark-header-cta flex-1 rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-ink"
               >
                 {dict.nav.cta}
               </a>

@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 // sempre (dict.process.steps), só a apresentação visual mudou.
 export function Process({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line bg-bg/80">
+    <section className="ark-section ark-process">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading eyebrow={dict.process.eyebrow} title={dict.process.title} size="md" />

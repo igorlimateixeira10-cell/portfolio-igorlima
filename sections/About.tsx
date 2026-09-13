@@ -18,7 +18,7 @@ export function About({ dict }: { dict: Dictionary }) {
   ];
 
   return (
-    <section id="about" className="border-b border-line bg-surface/85">
+    <section id="about" className="ark-section ark-about">
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
           <Reveal>

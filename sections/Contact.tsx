@@ -1,7 +1,9 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/layout/ContactForm";
-import { CoreEmblem } from "@/components/contact/CoreEmblem";
 import {
   WhatsAppIcon,
   MailIcon,
@@ -11,26 +13,62 @@ import {
 import { CONTACT_EMAIL, WHATSAPP_NUMBER } from "@/lib/contact";
 
 export function Contact({ dict }: { dict: Dictionary }) {
+  const [mobilePanel, setMobilePanel] = useState<"direct" | "form">("direct");
+  const [shouldLoadSignature, setShouldLoadSignature] = useState(false);
+  const signatureRef = useRef<HTMLVideoElement>(null);
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     dict.contact.whatsappMessage
   )}`;
 
+  useEffect(() => {
+    const video = signatureRef.current;
+    if (!video || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldLoadSignature(true);
+        observer.disconnect();
+      },
+      { rootMargin: "800px 0px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="contact" className="bg-bg/80">
+    <section id="contact" className={`ark-section ark-contact contact-panel--${mobilePanel}`}>
       <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
         {/* Mesmo painel grande usado em Serviços — a área de contato
             também é tratada como um bloco/produto único, não uma seção
             solta no fundo do site. */}
         <div className="tech-panel relative rounded-4xl p-6 sm:p-10 lg:p-14">
-          {/* Ilustração decorativa — mesma linguagem visual do Núcleo IA da
-              Hero (ver CoreEmblem.tsx) — só a partir do `xl`, atrás do
-              conteúdo, bem discreta pra não brigar com o formulário. */}
-          <div className="pointer-events-none absolute bottom-8 right-10 hidden w-56 opacity-60 xl:block">
-            <CoreEmblem />
+          <video
+            ref={signatureRef}
+            className="pointer-events-none absolute bottom-8 right-10 hidden w-64 xl:block"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload={shouldLoadSignature ? "metadata" : "none"}
+            src={shouldLoadSignature ? "/videos/assinatura-alpha.webm" : undefined}
+            width="640"
+            height="360"
+            aria-label="Assinatura animada de Igor Lima Teixeira"
+          />
+
+          <div className="contact-mobile-tabs" role="tablist" aria-label={dict.contact.eyebrow} data-scene-interactive>
+            <button type="button" role="tab" aria-selected={mobilePanel === "direct"} onClick={() => setMobilePanel("direct")}>
+              {dict.contact.directTitle}
+            </button>
+            <button type="button" role="tab" aria-selected={mobilePanel === "form"} onClick={() => setMobilePanel("form")}>
+              {dict.contact.form.submit}
+            </button>
           </div>
 
           <div className="relative grid gap-14 lg:grid-cols-[1fr_1.3fr]">
-            <div>
+            <div className="contact-direct-panel">
               <Reveal>
                 <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent-ink">
                   {dict.contact.eyebrow}
@@ -129,7 +167,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
               </Reveal>
             </div>
 
-            <Reveal delay={120}>
+            <Reveal delay={120} className="contact-form-panel">
               {/* bg-bg quase opaco: é um formulário de verdade, precisa de
                   contraste alto pros campos. */}
               <div className="rounded-2xl border border-line bg-bg/80 p-6 backdrop-blur-sm sm:p-8">

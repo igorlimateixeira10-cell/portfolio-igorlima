@@ -3,16 +3,36 @@
 import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/data/dictionaries/pt";
 import { ButtonAsButton } from "@/components/ui/Button";
-import { CONTACT_EMAIL } from "@/lib/contact";
+import { WHATSAPP_NUMBER } from "@/lib/contact";
 
-// Não há backend configurado para este site. O envio abre o app de e-mail do
-// visitante (mailto:) com a mensagem pronta — funciona de verdade, sem
-// depender de nenhum serviço externo. Quando houver um backend (ex.: uma
-// API route ou um serviço como Formspree/Resend), troque handleSubmit por
-// uma chamada real.
+// Não há backend configurado para este site. O envio abre o WhatsApp com a
+// mensagem pronta, usando o mesmo número do botão de contato do portfólio.
 
 export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
   const [sent, setSent] = useState(false);
+  const [emailError, setEmailError] = useState("");
+
+  function validateEmail(value: string) {
+    const email = value.trim().toLowerCase();
+    const [, domain = ""] = email.split("@");
+    const reservedDomains = new Set([
+      "example.com",
+      "example.org",
+      "example.net",
+      "invalid",
+      "localhost",
+      "test.com",
+    ]);
+
+    if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ||
+      reservedDomains.has(domain)
+    ) {
+      return dict.emailInvalid;
+    }
+
+    return "";
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,7 +43,13 @@ export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
     const projectType = formData.get("projectType")?.toString() ?? "";
     const message = formData.get("message")?.toString() ?? "";
 
-    const subject = `${projectType} — ${name}`;
+    const validationMessage = validateEmail(email);
+    if (validationMessage) {
+      setEmailError(validationMessage);
+      document.getElementById("email")?.focus();
+      return;
+    }
+
     const body = [
       `${dict.name}: ${name}`,
       `${dict.email}: ${email}`,
@@ -35,9 +61,7 @@ export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
       .filter(Boolean)
       .join("\n");
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`;
 
     setSent(true);
   }
@@ -46,7 +70,36 @@ export function ContactForm({ dict }: { dict: Dictionary["contact"]["form"] }) {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label={dict.name} name="name" required />
-        <Field label={dict.email} name="email" type="email" required />
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="email" className="text-sm text-ink-soft">
+            {dict.email}
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            aria-invalid={emailError ? "true" : undefined}
+            aria-describedby={emailError ? "email-error" : undefined}
+            onBlur={(event) => setEmailError(validateEmail(event.currentTarget.value))}
+            onChange={(event) => {
+              setSent(false);
+              if (emailError) setEmailError(validateEmail(event.currentTarget.value));
+            }}
+            onInvalid={(event) => {
+              event.preventDefault();
+              setEmailError(validateEmail(event.currentTarget.value));
+            }}
+            className={`rounded-lg border bg-surface px-3.5 py-2.5 text-sm text-ink outline-none focus-visible:border-ink ${
+              emailError ? "border-red-500 focus-visible:border-red-600" : "border-line"
+            }`}
+          />
+          {emailError && (
+            <p id="email-error" role="alert" className="text-xs font-medium text-red-600">
+              {emailError}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">

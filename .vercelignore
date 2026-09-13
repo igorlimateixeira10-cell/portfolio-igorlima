@@ -1,0 +1,7 @@
+# Fontes e backups locais: nenhum deles é referenciado em runtime.
+assets-source/
+public/arkkhe/astronaut-original.png
+public/arkkhe/robot.mp4
+public/arkkhe/robot-poster.jpg
+public/assinatura.mp4
+**/.DS_Store

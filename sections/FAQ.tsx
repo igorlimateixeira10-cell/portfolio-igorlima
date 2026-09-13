@@ -19,10 +19,22 @@ import { Reveal } from "@/components/ui/Reveal";
 export function FAQ({ dict }: { dict: Dictionary }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  if (dict.faq.items.length === 0) return null;
+  if (dict.faq.items.length === 0) {
+    return (
+      <section id="faq" className="ark-section ark-faq">
+        <div className="mx-auto flex max-w-3xl flex-col items-start justify-center px-5 py-24 sm:px-8 sm:py-32">
+          <SectionHeading eyebrow={dict.faq.eyebrow} title={dict.faq.title} size="md" />
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">{dict.contact.subtitle}</p>
+          <a href="#contact" className="link-underline mt-7 text-sm font-medium text-ink">
+            {dict.nav.contact} →
+          </a>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section id="faq" className="border-b border-line bg-surface/70">
+    <section id="faq" className="ark-section ark-faq">
       <div className="mx-auto max-w-3xl px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
           <SectionHeading eyebrow={dict.faq.eyebrow} title={dict.faq.title} align="center" size="md" />

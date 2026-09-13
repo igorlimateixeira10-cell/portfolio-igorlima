@@ -6,8 +6,8 @@ import Lenis from "lenis";
 /**
  * Scroll suave com inércia (referência: `html.lenis` do DevClub — eles usam
  * a mesma lib). Só troca a FÍSICA da rolagem; não substitui nada do resto
- * do site (Reveal, o brilho do SiteBackground, etc. continuam funcionando
- * do mesmo jeito, só que respondendo a uma posição de scroll "suavizada"
+ * do site (Reveal e os demais componentes continuam funcionando do mesmo
+ * jeito, só que respondendo a uma posição de scroll "suavizada"
  * em vez do scroll bruto do navegador).
  *
  * Sem elemento visual — monta uma vez no layout raiz (dentro do <body>,
@@ -54,9 +54,8 @@ export function SmoothScroll() {
     }
     document.addEventListener("click", onClick);
 
-    // Mesma ideia do resto do site (CoreEmblem, SiteBackground, etc.):
-    // pausa o loop com a aba oculta, sem custo de rAF rodando à toa em
-    // background.
+    // Pausa o loop com a aba oculta, sem custo de rAF rodando à toa em
+    // segundo plano.
     function onVisibilityChange() {
       if (document.hidden) {
         cancelAnimationFrame(rafId);

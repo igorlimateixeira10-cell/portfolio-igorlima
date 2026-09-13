@@ -15,21 +15,21 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "site-leo",
-    image: "/projects/site-leo.jpg",
+    image: "/projects/pesanha.jpg",
     liveUrl: "https://site-leo-nine.vercel.app",
     githubUrl: "https://github.com/igorlimateixeira10-cell/site-leo",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
   },
   {
     slug: "clickcola",
-    image: "/projects/clickcola.jpg",
+    image: "/projects/fabio.jpg",
     liveUrl: "https://projeto-clickcola.vercel.app",
     githubUrl: "https://github.com/igorlimateixeira10-cell/projeto-clickcola",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
   },
   {
     slug: "refriar",
-    image: "/projects/refriar.jpg",
+    image: "/projects/yago.jpg",
     liveUrl: "https://projeto-refriar.vercel.app",
     githubUrl: "https://github.com/igorlimateixeira10-cell/projeto-refriar",
     tech: ["HTML5", "CSS3", "JavaScript"],

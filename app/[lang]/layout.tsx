@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { locales, isLocale, defaultLocale, getDictionary } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site-url";
 import { notFound } from "next/navigation";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { SiteBackground } from "@/components/wallpaper/SiteBackground";
 import "../globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -32,11 +31,10 @@ export async function generateMetadata({
   const locale = isLocale(lang) ? lang : defaultLocale;
   const dict = await getDictionary(locale);
 
-  // TODO: defina NEXT_PUBLIC_SITE_URL com a URL final de produção assim que o deploy existir.
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: siteUrl,
     title: dict.meta.title,
     description: dict.meta.description,
     alternates: {
@@ -70,7 +68,7 @@ export default async function LangLayout({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   // Dados estruturados (schema.org/Person) com apenas informações reais e
   // já públicas — nome, cargo e os mesmos perfis já linkados no site.
@@ -79,7 +77,7 @@ export default async function LangLayout({
     "@type": "Person",
     name: "Igor Lima Teixeira",
     jobTitle: "Front-End Developer",
-    url: `${siteUrl}/${lang}`,
+    url: new URL(`/${lang}`, siteUrl).toString(),
     sameAs: [
       "https://github.com/igorlimateixeira10-cell",
       "https://www.linkedin.com/in/igor-teixeira-4055232b8/",
@@ -93,8 +91,6 @@ export default async function LangLayout({
       className={`${instrumentSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-ink font-sans">
-        <SiteBackground />
-        <SmoothScroll />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

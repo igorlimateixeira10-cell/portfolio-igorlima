@@ -13,7 +13,6 @@ import { About } from "@/sections/About";
 import { Process } from "@/sections/Process";
 import { FAQ } from "@/sections/FAQ";
 import { Contact } from "@/sections/Contact";
-import { SignalMarquee } from "@/components/ui/SignalMarquee";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 
 export default async function HomePage({
@@ -32,13 +31,12 @@ export default async function HomePage({
       <Header dict={dict} locale={locale} />
       <main className="flex-1">
         <Hero dict={dict} />
-        <SignalMarquee />
-        <Qualify dict={dict} />
-        <Benefits dict={dict} />
         <Projects dict={dict} />
-        <WhyMe dict={dict} />
         <Services dict={dict} />
+        <Benefits dict={dict} />
+        <Qualify dict={dict} />
         <About dict={dict} />
+        <WhyMe dict={dict} />
         <Process dict={dict} />
         <TechStack dict={dict} />
         <FAQ dict={dict} />

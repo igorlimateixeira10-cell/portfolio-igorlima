@@ -4,10 +4,9 @@ import { useSyncExternalStore } from "react";
 
 /**
  * `prefers-reduced-motion`, lido de forma segura para SSR/hidratação
- * (padrão já usado em vários pontos do projeto — AiCoreScene.tsx,
- * TiltCard.tsx, SmoothScroll.tsx). Extraído para cá pra não reescrever a
- * mesma leitura de matchMedia em cada componente novo que precisa dela
- * (ver ProjectPanel3D.tsx).
+ * (padrão já usado em vários pontos do projeto — TiltCard.tsx e
+ * SmoothScroll.tsx). Extraído para cá para não reescrever a mesma leitura
+ * de matchMedia em cada componente que precisa dela.
  */
 function subscribe(callback: () => void) {
   const mql = window.matchMedia("(prefers-reduced-motion: reduce)");

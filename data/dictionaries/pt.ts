@@ -49,6 +49,7 @@ export type Dictionary = {
     title: string;
     subtitle: string;
     viewProject: string;
+    viewDetails: string;
     viewCode: string;
     otherProjects: string;
     caseLabel: string;
@@ -110,6 +111,7 @@ export type Dictionary = {
       message: string;
       submit: string;
       note: string;
+      emailInvalid: string;
     };
     directTitle: string;
     whatsappCta: string;
@@ -146,7 +148,7 @@ export const pt: Dictionary = {
     services: "Serviços",
     about: "Sobre",
     contact: "Contato",
-    cta: "Solicitar orçamento",
+    cta: "Entre em contato comigo",
   },
   hero: {
     eyebrow: "Desenvolvedor Front-End",
@@ -211,6 +213,7 @@ export const pt: Dictionary = {
     subtitle:
       "Sites institucionais reais, desenvolvidos e publicados para negócios de diferentes segmentos.",
     viewProject: "Visitar o site",
+    viewDetails: "Ver detalhes",
     viewCode: "Ver código no GitHub",
     otherProjects: "Outros projetos técnicos no GitHub",
     caseLabel: "Case",
@@ -395,7 +398,8 @@ export const pt: Dictionary = {
       ],
       message: "Mensagem",
       submit: "Enviar mensagem",
-      note: "Ao enviar, seu e-mail padrão será aberto com a mensagem pronta para envio.",
+      note: "Ao enviar, o WhatsApp será aberto com sua mensagem pronta.",
+      emailInvalid: "Esse e-mail está incorreto. Informe um e-mail válido.",
     },
     directTitle: "Ou fale diretamente",
     whatsappCta: "Conversar no WhatsApp",

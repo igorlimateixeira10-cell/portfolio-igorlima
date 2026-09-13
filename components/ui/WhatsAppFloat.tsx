@@ -36,10 +36,10 @@ export function WhatsAppFloat({ dict }: { dict: Dictionary }) {
         target="_blank"
         rel="noreferrer"
         aria-label={dict.contact.whatsappCta}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink shadow-[0_10px_30px_-8px_rgba(0,0,0,0.6),0_0_28px_-6px_rgba(var(--accent-glow),0.6)] transition-all hover:bg-accent-hover hover:scale-105"
+        className="whatsapp-float__button relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink shadow-[0_10px_30px_-8px_rgba(0,0,0,0.6),0_0_28px_-6px_rgba(var(--accent-glow),0.6)] transition-all hover:bg-accent-hover"
       >
         <span className="whatsapp-float__ping absolute inset-0 rounded-full bg-accent" aria-hidden />
-        <WhatsAppIcon className="relative h-6 w-6" />
+        <WhatsAppIcon className="relative z-10 h-6 w-6" />
       </a>
     </div>
   );

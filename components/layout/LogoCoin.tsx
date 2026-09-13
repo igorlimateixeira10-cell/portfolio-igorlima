@@ -1,4 +1,4 @@
-// Logo do header (public/logo.png) girando em 3D feito "moeda" — só CSS
+// Logo do header (public/logo-igor-lima-transparent.png) girando em 3D feito "moeda" — só CSS
 // (perspective + rotateY + preserve-3d; sem three.js/framer-motion, o
 // projeto não tinha nenhuma lib de 3D/partículas instalada e a instrução
 // foi não adicionar dependência à toa). O `backface-visibility` fica no
@@ -30,7 +30,7 @@ export function LogoCoin() {
       {/* A moeda em si. */}
       <span className="logo-coin-stage__spin relative block h-full w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="" className="logo-coin__img h-full w-full rounded-full object-cover" />
+        <img src="/logo-igor-lima-transparent.png?v=20260913" alt="" className="logo-coin__img h-full w-full rounded-full object-cover" />
       </span>
     </span>
   );

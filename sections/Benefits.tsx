@@ -7,7 +7,7 @@ import { TiltCard } from "@/components/ui/TiltCard";
 // grande em destaque) em vez de uma lista de texto com borda lateral.
 export function Benefits({ dict }: { dict: Dictionary }) {
   return (
-    <section className="border-b border-line bg-surface/70">
+    <section className="ark-section ark-benefits">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
         <h2 className="sr-only">{dict.benefits.title}</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

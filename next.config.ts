@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
     // workspace por causa do package.json solto que existe lá fora.
     root: path.join(__dirname),
   },
+  async headers() {
+    return [
+      {
+        source: "/arkkhe/:asset(astronaut\\.png)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
